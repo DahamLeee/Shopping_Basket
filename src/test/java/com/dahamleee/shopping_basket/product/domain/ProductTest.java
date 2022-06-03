@@ -29,31 +29,31 @@ class ProductTest {
     @Test
     @DisplayName("상품의 재고 증가")
     void addProductQuantity() {
-        p1.addProductQuantity(10);
-        p2.addProductQuantity(10);
+        p1.addQuantity(10);
+        p2.addQuantity(10);
 
         assertAll(
-                () -> assertThat(p1.getProductQuantity()).isEqualTo(20),
-                () -> assertThat(p2.getProductQuantity()).isEqualTo(15)
+                () -> assertThat(p1.getQuantity()).isEqualTo(20),
+                () -> assertThat(p2.getQuantity()).isEqualTo(15)
         );
     }
 
     @Test
     @DisplayName("상품의 재고 감소")
     void removeProductQuantity() {
-        p1.removeProductQuantity(5);
-        p2.removeProductQuantity(5);
+        p1.removeQuantity(5);
+        p2.removeQuantity(5);
 
         assertAll(
-                () -> assertThat(p1.getProductQuantity()).isEqualTo(5),
-                () -> assertThat(p2.getProductQuantity()).isZero()
+                () -> assertThat(p1.getQuantity()).isEqualTo(5),
+                () -> assertThat(p2.getQuantity()).isZero()
         );
     }
 
     @Test
     @DisplayName("상품의 재고를 0 미만으로 감소시킬 시 예외 처리")
     void removeProductQuantityException() {
-        assertThatThrownBy(() -> p1.removeProductQuantity(20))
+        assertThatThrownBy(() -> p1.removeQuantity(20))
                 .isInstanceOf(NotEnoughProductException.class);
     }
 }

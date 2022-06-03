@@ -21,45 +21,45 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String productName;
+    private String name;
     private int price;
-    private int productQuantity;
+    private int quantity;
 
-    private Product(String productName, int price, int productQuantity) {
-        this.productName = productName;
+    private Product(String name, int price, int quantity) {
+        this.name = name;
         this.price = price;
-        this.productQuantity = productQuantity;
+        this.quantity = quantity;
     }
 
-    public static Product of(String productName, int price, int productQuantity) {
-        return new Product(productName, price, productQuantity);
+    public static Product of(String name, int price, int quantity) {
+        return new Product(name, price, quantity);
     }
 
     /**
      * 상품의 재고 증가
      */
-    public void addProductQuantity(int quantity) {
-        this.productQuantity += quantity;
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
     }
 
     /**
      * 상품 구매 혹은 특정 이유로 인한 상품의 재고 감소
      */
-    public void removeProductQuantity(int quantity) {
-        int restQuantity = this.productQuantity - quantity;
+    public void removeQuantity(int quantity) {
+        int restQuantity = this.quantity - quantity;
         if (restQuantity < 0) {
-            throw new NotEnoughProductException("상품의 현재 재고는 " + this.productQuantity + "개 입니다.");
+            throw new NotEnoughProductException("상품의 현재 재고는 " + this.quantity + "개 입니다.");
         }
-        this.productQuantity = restQuantity;
+        this.quantity = restQuantity;
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", productName='" + productName + '\'' +
+                ", name='" + name + '\'' +
                 ", price=" + price +
-                ", productQuantity=" + productQuantity +
+                ", quantity=" + quantity +
                 '}';
     }
 }
