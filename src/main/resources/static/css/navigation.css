@@ -141,6 +141,10 @@ nav > ul > li:hover ul {
     justify-content: center;
 }
 
+.layout-main-image {
+    border-radius: 10px;
+}
+
 .no-decoration-a-black {
     display: flex;
     color: black;

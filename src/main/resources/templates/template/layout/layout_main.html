@@ -31,6 +31,12 @@
     <!-- 상단 navbar -->
     <div th:replace="template/fragment/navbar :: navFragment"></div>
 
+    <div class="m-2">
+        <div class="layout-main-image-content">
+            <img class="layout-main-image" src="/img/main-image.jpg" alt="main-image">
+        </div>
+    </div>
+
     <div class="container" layout:fragment="content"></div>
 </div>
 
