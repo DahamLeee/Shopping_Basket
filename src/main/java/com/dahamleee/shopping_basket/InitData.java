@@ -3,10 +3,10 @@ package com.dahamleee.shopping_basket;
 import com.dahamleee.shopping_basket.product.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 
 @Component
 @RequiredArgsConstructor
