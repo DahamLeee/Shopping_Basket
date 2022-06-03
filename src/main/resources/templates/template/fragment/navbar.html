@@ -1,0 +1,57 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div class="nav-fixed" th:fragment="navFragment">
+    <div class="layout-navigation-primary">
+        <div class="layout-navigation-dropdown">
+            <div class="layout-navigation-primary-content">
+                <div class="layout-navigation-primary-left">
+                    <div class="layout-navigation-primary-logo">
+                        <a th:href="@{/}">
+                            <img src="/img/main-logo.png" alt="atheart-logo">
+                        </a>
+                    </div>
+                </div>
+                <nav class="layout-navigation-primary-menu">
+                    <ul class="layout-navigation-primary-menu-item clearfix">
+                        <li class="text-black"> 1st menu <!-- 계정 관리 -->
+                            <ul class="layout-navigation-primary-menu-dropdown">
+                                <li>1st menu</li>
+                                <li>1st menu</li>
+                            </ul>
+                        </li>
+                        <li class="text-black"> 2nd menu
+                            <ul class="layout-navigation-primary-menu-dropdown">
+                                <li>2nd menu</li>
+                                <li>2nd menu</li>
+                            </ul>
+                        </li>
+                        <li class="text-black">3rd menu
+                            <ul class="layout-navigation-primary-menu-dropdown">
+                                <li>3rd menu</li>
+                                <li>3rd menu</li>
+                                <li>3rd menu</li>
+                            </ul>
+                        </li>
+                        <li class="text-black"> 4th menu
+                            <ul class="layout-navigation-primary-menu-dropdown">
+                                <li>4th menu</li>
+                                <li>4th menu</li>
+                                <li>4th menu</li>
+                                <li>4th menu</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="layout-navigation-primary-right">
+                    <a class="no-decoration-a-black" th:href="@{/}">
+                        <i class="fas fa-shopping-cart fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

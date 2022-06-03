@@ -1,0 +1,151 @@
+/* nav 상단 고정 */
+.nav-fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav > ul > li {
+    float:left;
+    line-height:40px;
+    margin-right:40px;
+    position: relative;
+}
+nav > ul > li ul {
+    width:100%;
+    opacity:0;
+    position: absolute;
+    transition:0.1s 0.1s;
+}
+
+nav > ul > li ul li {
+    white-space:nowrap;
+}
+
+nav > ul > li:hover ul {
+    opacity:1;
+}
+
+/* layout 전체 감싸기 */
+@media screen and (min-width: 1024px) {
+    .layout-navigation-primary-content {
+        padding: 10px 60px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .layout-navigation-primary-content {
+        height: 80px;
+        padding: 10px 40px;
+        max-width: 1256px;
+    }
+}
+
+.layout-navigation-primary-content {
+    display: flex;
+    margin: 0 auto;
+}
+
+/* nav 밑쪽 underline 생성 */
+.layout-navigation-primary-wrap {
+    border-bottom: 1mm solid gray;
+}
+
+.layout-navigation-primary {
+    transition: top .1s;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ededed;
+    z-index: 502;
+}
+
+/* logo 위치 */
+.layout-navigation-primary-left {
+    position: static;
+    margin-right: 35px;
+    transform: none;
+}
+
+.layout-navigation-primary-logo {
+    /* anything else ? */
+}
+
+.layout-navigation-primary-menu {
+    display: block;
+}
+
+.layout-navigation-primary-menu-item {
+    position: relative;
+    display: inline-block;
+    padding: 16px 6px;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 550;
+    cursor: pointer;
+}
+
+.layout-navigation-primary-menu-dropdown {
+    visibility: hidden;
+    transition: 0.25s;
+    font-size: 14px;
+}
+
+.navbar-divider {
+    width: 0;
+    border-right: 1px solid #e3e6f0;
+    height: calc(4.775rem - 2rem);
+    margin: auto 0.5rem;
+}
+
+.layout-navigation-primary-right {
+    display: flex;
+    flex: 1 0 auto;
+    position: static;
+    -webkit-box-align: start;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    justify-content: center;
+}
+
+.layout-navigation-primary-dropdown-content {
+    display: flex;
+    margin: 1px 10px 0;
+}
+
+.user-icon:hover {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+    .layout-main-image-content {
+        padding: 10px 60px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .layout-main-image-content {
+        padding: 10px 40px;
+        max-width: 1256px;
+    }
+}
+
+.layout-main-image-content {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.no-decoration-a-black {
+    display: flex;
+    color: black;
+}
+
+.no-decoration-a-black:hover {
+    color: black;
+}
