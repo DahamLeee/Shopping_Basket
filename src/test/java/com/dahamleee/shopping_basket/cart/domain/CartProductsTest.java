@@ -16,8 +16,8 @@ class CartProductsTest {
 
         cartProducts.add(cartProduct);
 
-        assertThat(cartProducts.getCartProducts()).hasSize(1);
-        assertThat(cartProducts.getCartProducts()).containsExactly(cartProduct);
+        assertThat(cartProducts.getValue()).hasSize(1);
+        assertThat(cartProducts.getValue()).containsExactly(cartProduct);
     }
 
     @Test

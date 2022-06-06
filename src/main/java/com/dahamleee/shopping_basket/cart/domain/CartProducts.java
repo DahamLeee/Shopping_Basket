@@ -16,21 +16,27 @@ import static java.util.Collections.*;
 public class CartProducts {
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private List<CartProduct> cartProducts = new ArrayList<>();
+    private List<CartProduct> value = new ArrayList<>();
 
     public void add(CartProduct cartProduct) {
         // 새로운 것을 추가하는 것인지, 이미 기존에 있는 것을 추가하는 것인지 비즈니스 로직을 짜야함
-        cartProducts.add(cartProduct);
+        value.add(cartProduct);
     }
 
     public int totalPrice() {
-        return cartProducts.stream()
+        return value.stream()
                 .mapToInt(CartProduct::calculateTotalCartProductPrice)
                 .reduce(0, Integer::sum);
     }
 
-    public List<CartProduct> getCartProducts() {
-        return unmodifiableList(cartProducts);
+    public List<CartProduct> getValue() {
+        return unmodifiableList(value);
     }
 
+    @Override
+    public String toString() {
+        return "CartProducts{" +
+                "value=" + value +
+                '}';
+    }
 }
