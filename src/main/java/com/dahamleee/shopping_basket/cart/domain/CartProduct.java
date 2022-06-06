@@ -97,4 +97,14 @@ public class CartProduct {
             throw new CartProductCountMinimumException("최소 주문 수량은 1개 입니다.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "CartProduct{" +
+                "id=" + id +
+                ", cart=" + cart +
+                ", cartPrice=" + cartPrice +
+                ", count=" + count +
+                '}';
+    }
 }

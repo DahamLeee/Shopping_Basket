@@ -1,12 +1,11 @@
 package com.dahamleee.shopping_basket.cart.domain;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
+@Getter
 public class Cart {
 
     @Id
