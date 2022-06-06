@@ -49,6 +49,11 @@ public class CartProduct {
         return new CartProduct(product, cartPrice);
     }
 
+    // == 연관 관계 편이 메서드 == //
+    public void cart(Cart cart) {
+        this.cart = cart;
+    }
+
     public int calculateTotalCartProductPrice() {
         return cartPrice * count;
     }
