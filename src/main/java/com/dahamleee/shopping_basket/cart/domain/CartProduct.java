@@ -24,6 +24,10 @@ public class CartProduct {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
     private int cartPrice;
     private int count;
 
@@ -43,6 +47,11 @@ public class CartProduct {
 
     public static CartProduct createCartProduct(Product product, int cartPrice) {
         return new CartProduct(product, cartPrice);
+    }
+
+    // == 연관 관계 편이 메서드 == //
+    public void cart(Cart cart) {
+        this.cart = cart;
     }
 
     public int calculateTotalCartProductPrice() {

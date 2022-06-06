@@ -1,5 +1,7 @@
 package com.dahamleee.shopping_basket;
 
+import com.dahamleee.shopping_basket.cart.domain.Cart;
+import com.dahamleee.shopping_basket.cart.domain.CartProduct;
 import com.dahamleee.shopping_basket.product.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -7,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -27,8 +32,10 @@ public class InitData {
         private final EntityManager em;
 
         public void addProducts() {
-            em.persist(Product.of("허쉬 초코멜로쿠키 45g", 600, 10));
-            em.persist(Product.of("크리스피롤 12 곡 180g", 2_800, 5));
+            Product hush = Product.of("허쉬 초코멜로쿠키 45g", 600, 10);
+            Product roll = Product.of("크리스피롤 12 곡 180g", 2_800, 5);
+            em.persist(hush);
+            em.persist(roll);
             em.persist(Product.of("동물복지 유정란 15 개입 대란", 4_350, 0));
             em.persist(Product.of("말랑카우 핸드워시 250ml", 2_600, 6));
             em.persist(Product.of("삼립 미니꿀호떡 322g", 1_200, 4));
@@ -42,6 +49,19 @@ public class InitData {
             em.persist(Product.of("아쿠아 머그", 23_000, 7));
             em.persist(Product.of("삼성전자 43 인치 스마트모니터", 480_000, 2));
             em.persist(Product.of("나이키 헤리티지 스우시 캡", 25_000, 5));
+
+            addCartProducts(hush, roll);
+        }
+
+        private void addCartProducts(Product... products) {
+            List<CartProduct> cartProducts = Arrays.stream(products)
+                    .map(product -> CartProduct.createCartProduct(product, product.getPrice()))
+                    .collect(Collectors.toList());
+
+            Cart cart = new Cart();
+            cartProducts.forEach(cart::addCartProduct);
+
+            em.persist(cart);
         }
     }
 }

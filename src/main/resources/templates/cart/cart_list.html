@@ -11,18 +11,16 @@
     <title></title>
 </head>
 <body>
+
 <div layout:fragment="content">
 
-    <div class="m-2">
-        <div class="layout-main-image-content">
-            <img class="layout-main-image" src="/img/main-image.jpg" alt="main-image">
-        </div>
-    </div>
+    <h3 class="m-2">장바구니</h3>
 
-    <div th:each="product: ${products}">
-        <div th:text="|${product.name} ${product.price} ${product.quantity}|"></div>
-    </div>
+    <!-- 상품 목록하고 -->
+
+    <!-- 그 다음 전체 결과로 가자 -->
 
 </div>
+
 </body>
 </html>
