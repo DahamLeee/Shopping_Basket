@@ -15,8 +15,12 @@
 
 <div layout:fragment="content">
 
-    <div th:each="product: ${products}">
-        <div th:text="|${product.name} ${product.price} ${product.quantity}|"></div>
+    <div class="content-list">
+        <div class="row">
+            <div th:each="product: ${products}" class="col-md-4 col-xxl-3 mt-5">
+                <div th:replace="product/product_card :: productCardFragment(${product})"></div>
+            </div>
+        </div>
     </div>
 
 </div>
