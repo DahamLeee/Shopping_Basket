@@ -13,6 +13,7 @@
 <body>
 <div layout:fragment="content">
 
+<<<<<<< HEAD
     <div class="m-2">
         <div class="layout-main-image-content">
             <img class="layout-main-image" src="/img/main-image.jpg" alt="main-image">
@@ -21,6 +22,14 @@
 
     <div th:each="product: ${products}">
         <div th:text="|${product.name} ${product.price} ${product.quantity}|"></div>
+=======
+    <div class="content-list">
+        <div class="row">
+            <div th:each="product: ${products}" class="col-md-4 col-xxl-3 mt-5">
+                <div th:replace="product/product_card :: productCardFragment(${product})"></div>
+            </div>
+        </div>
+>>>>>>> feature/product
     </div>
 
 </div>
