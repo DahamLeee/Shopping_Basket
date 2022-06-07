@@ -42,8 +42,8 @@
             url: "/api/cart/" + productId,
             data: {},
             dataType: "json",
-            success: (msg) => {alert(msg)},
-            error: (log) => {alert(log)}
+            success: (data) => {alert(data.message)},
+            error: (data) => {alert(data.message)}
         })
     }
 </script>
