@@ -1,6 +1,12 @@
+/* layout */
 #wrapper {
     padding-top: 80px;
     min-height: calc(100vh - 90px);
+}
+
+.container {
+    position: static;
+    max-width: 1256px;
 }
 
 /* text */
@@ -30,4 +36,11 @@
 
 .content-list {
     position: static;
+}
+
+/* copyright */
+.copyright {
+    color: gray;
+    line-height: 1;
+    font-size: 0.7rem;
 }
