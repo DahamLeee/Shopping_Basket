@@ -107,4 +107,8 @@ public class CartProduct {
                 ", count=" + count +
                 '}';
     }
+
+    public boolean isSameProduct(CartProduct cartProduct) {
+        return this.product.equals(cartProduct.product);
+    }
 }
