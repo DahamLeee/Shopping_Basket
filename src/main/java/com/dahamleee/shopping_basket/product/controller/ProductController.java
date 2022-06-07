@@ -19,7 +19,7 @@ public class ProductController {
      */
     @GetMapping("/")
     public String products(
-            @PageableDefault Pageable pageable, Model model) {
+            @PageableDefault(size = 12) Pageable pageable, Model model) {
 
         model.addAttribute("products", productService.search(pageable));
 

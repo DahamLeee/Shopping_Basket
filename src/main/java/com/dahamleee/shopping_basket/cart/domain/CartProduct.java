@@ -4,10 +4,12 @@ import com.dahamleee.shopping_basket.exception.CartProductCountMaximumException;
 import com.dahamleee.shopping_basket.exception.CartProductCountMinimumException;
 import com.dahamleee.shopping_basket.product.domain.Product;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CartProduct {
@@ -106,5 +108,9 @@ public class CartProduct {
                 ", cartPrice=" + cartPrice +
                 ", count=" + count +
                 '}';
+    }
+
+    public boolean isSameProduct(CartProduct cartProduct) {
+        return this.product.equals(cartProduct.product);
     }
 }

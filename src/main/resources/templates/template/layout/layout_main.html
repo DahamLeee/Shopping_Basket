@@ -33,5 +33,20 @@
     <div class="container" layout:fragment="content"></div>
 </div>
 
+<div th:replace="~{template/fragment/main-footer :: copyrightFragment}"></div>
+
+<script th:inline="javascript">
+    function addCart(productId) {
+        $.ajax({
+            type: "POST",
+            url: "/api/cart/" + productId,
+            data: {},
+            dataType: "json",
+            success: (data) => {alert(data.message)},
+            error: (data) => {alert(data.message)}
+        })
+    }
+</script>
+
 </body>
 </html>

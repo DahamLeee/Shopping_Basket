@@ -1,4 +1,46 @@
+/* layout */
 #wrapper {
     padding-top: 80px;
     min-height: calc(100vh - 90px);
+}
+
+.container {
+    position: static;
+    max-width: 1256px;
+}
+
+/* text */
+.text-xs {
+    font-size: 0.7rem;
+}
+
+.text-m {
+    font-size: 1rem;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: rgba(248,246,242,.3);
+    background-clip: border-box;
+    border: 1px solid #e8e5dd;
+    border-radius: 0.95rem;
+    box-shadow: none;
+}
+
+.product-card:hover {
+    box-shadow: .5rem .5rem .5rem rgba(0, 0, 0, .15);
+}
+
+.content-list {
+    position: static;
+}
+
+/* copyright */
+.copyright {
+    color: gray;
+    line-height: 1;
+    font-size: 0.7rem;
 }

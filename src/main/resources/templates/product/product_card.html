@@ -1,0 +1,26 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="productCardFragment(product)">
+    <div class="product-card h-100 py-2">
+        <div class="card-body">
+            <div class="d-flex no-gutters align-item align-items-center mb-3">
+                <div class="col me-2">
+                    <div class="text-xs text-muted" th:text="${product.name}"></div>
+                    <div class="text-m font-weight-bold" th:text="|${product.price} 원|"></div>
+                </div>
+                <div class="col-auto">
+                    <a class="no-decoration-a-black"
+                       th:productId="${product.productId}"
+                       th:onclick="addCart(this.getAttribute('productId'))"> <!-- REST API 호출해야 됨. -->
+                        <i class="fas fa-cart-plus fa-lg"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="text-xs" th:text="|${product.quantity} 개|"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
