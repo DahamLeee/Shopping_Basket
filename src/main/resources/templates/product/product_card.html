@@ -9,7 +9,9 @@
                     <div class="text-m font-weight-bold" th:text="|${product.price} 원|"></div>
                 </div>
                 <div class="col-auto">
-                    <a class="no-decoration-a-black" th:href="@{/}"> <!-- REST API 호출해야 됨. -->
+                    <a class="no-decoration-a-black"
+                       th:productId="${product.productId}"
+                       th:onclick="addCart(this.getAttribute('productId'))"> <!-- REST API 호출해야 됨. -->
                         <i class="fas fa-cart-plus fa-lg"></i>
                     </a>
                 </div>

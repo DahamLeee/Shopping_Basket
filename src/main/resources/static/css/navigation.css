@@ -148,6 +148,7 @@ nav > ul > li:hover ul {
 .no-decoration-a-black {
     display: flex;
     color: black;
+    cursor: pointer;
 }
 
 .no-decoration-a-black:hover {
