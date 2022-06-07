@@ -26,14 +26,14 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public void addCartProduct(Long productId) {
+    public int addCartProduct(Long productId) {
         Product findProduct = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("존재하지 않는 상품은 장바구니에 담을 수 없습니다."));
 
         Cart cart = cartRepository.findFirstCart()
                 .orElseThrow(() -> new CartNotFoundException("장바구니가 존재하지 않습니다."));
 
-        cart.addCartProduct(CartProduct.createCartProduct(findProduct, findProduct.getPrice()));
+        return cart.addCartProduct(CartProduct.createCartProduct(findProduct, findProduct.getPrice()));
     }
 
 }

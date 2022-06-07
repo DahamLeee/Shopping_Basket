@@ -1,8 +1,10 @@
 package com.dahamleee.shopping_basket.cart.controller;
 
+import com.dahamleee.shopping_basket.cart.response.CartResponse;
 import com.dahamleee.shopping_basket.cart.service.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +17,12 @@ public class CartApiController {
     private final CartService cartService;
 
     @PostMapping("/api/cart/{productId}")
-    public Long addCartProduct(@PathVariable Long productId) {
+    public ResponseEntity<CartResponse> addCartProduct(@PathVariable Long productId) {
         log.info("addCartProduct API CALL : {}", productId);
 
-        cartService.addCartProduct(productId);
+        int productCount = cartService.addCartProduct(productId);
 
-        // 장바구니에 담겼다는 메시지를 정상적으로 보내줘야겠죠?
-        return productId;
+        // API Response 생성
+        return ResponseEntity.ok(CartResponse.createResponse("SUCCESS", productCount));
     }
 }

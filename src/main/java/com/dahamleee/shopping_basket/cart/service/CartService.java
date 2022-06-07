@@ -6,5 +6,5 @@ public interface CartService {
 
     Cart findFirstCart();
 
-    void addCartProduct(Long productId);
+    int addCartProduct(Long productId);
 }

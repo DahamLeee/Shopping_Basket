@@ -18,9 +18,10 @@ public class Cart {
     @Embedded
     private CartProducts cartProducts = new CartProducts();
 
-    public void addCartProduct(CartProduct cartProduct) {
-        cartProducts.add(cartProduct);
+    public int addCartProduct(CartProduct cartProduct) {
+        int productCount = cartProducts.add(cartProduct);
         cartProduct.cart(this);
+        return productCount;
     }
 
 }
