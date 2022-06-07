@@ -15,8 +15,8 @@ class ProductTest {
 
     @BeforeEach
     void setUp() {
-        p1 = Product.of("허쉬 초코멜로쿠키 45g", 600, 10);
-        p2 = Product.of("크리스피롤 12 곡 180g", 2_800, 5);
+        p1 = Product.of("허쉬 초코멜로쿠키 45g", 600, 10, DeliveryType.SSG);
+        p2 = Product.of("크리스피롤 12 곡 180g", 2_800, 5, DeliveryType.SSG);
     }
 
     @Test

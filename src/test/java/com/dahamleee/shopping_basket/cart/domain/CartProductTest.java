@@ -2,6 +2,7 @@ package com.dahamleee.shopping_basket.cart.domain;
 
 import com.dahamleee.shopping_basket.exception.CartProductCountMaximumException;
 import com.dahamleee.shopping_basket.exception.CartProductCountMinimumException;
+import com.dahamleee.shopping_basket.product.domain.DeliveryType;
 import com.dahamleee.shopping_basket.product.domain.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +18,7 @@ class CartProductTest {
 
     @BeforeEach
     void setUp() {
-        findProduct = Product.of("findProduct", 1_000, 5);
+        findProduct = Product.of("findProduct", 1_000, 5, DeliveryType.NORMAL);
         cartProduct = CartProduct.createCartProduct(findProduct, 1_000);
     }
 

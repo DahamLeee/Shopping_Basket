@@ -12,8 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CartProduct {
 
-    private static final int MAX_CART_COUNT = 20;
     private static final int MIN_CART_COUNT = 1;
+    private static final int MAX_CART_COUNT = 20;
 
     @Id
     @Column(name = "cart_product_id")
