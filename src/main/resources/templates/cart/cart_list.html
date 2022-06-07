@@ -17,6 +17,10 @@
     <h3 class="m-2">장바구니</h3>
 
     <!-- 상품 목록하고 -->
+    <div th:object="${cart}">
+        <div th:text="${cart.getCartProducts}">
+        </div>
+    </div>
 
     <!-- 그 다음 전체 결과로 가자 -->
 

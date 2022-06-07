@@ -12,8 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CartProduct {
 
-    private static final int MAX_CART_COUNT = 20;
     private static final int MIN_CART_COUNT = 1;
+    private static final int MAX_CART_COUNT = 20;
 
     @Id
     @Column(name = "cart_product_id")
@@ -96,5 +96,15 @@ public class CartProduct {
         if (count < MIN_CART_COUNT) {
             throw new CartProductCountMinimumException("최소 주문 수량은 1개 입니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "CartProduct{" +
+                "id=" + id +
+                ", cart=" + cart +
+                ", cartPrice=" + cartPrice +
+                ", count=" + count +
+                '}';
     }
 }

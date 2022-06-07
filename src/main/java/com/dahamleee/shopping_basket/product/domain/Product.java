@@ -25,14 +25,18 @@ public class Product {
     private int price;
     private int quantity;
 
-    private Product(String name, int price, int quantity) {
+    @Enumerated(EnumType.STRING)
+    private DeliveryType deliveryType;
+
+    private Product(String name, int price, int quantity, DeliveryType deliveryType) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.deliveryType = deliveryType;
     }
 
-    public static Product of(String name, int price, int quantity) {
-        return new Product(name, price, quantity);
+    public static Product of(String name, int price, int quantity, DeliveryType deliveryType) {
+        return new Product(name, price, quantity, deliveryType);
     }
 
     /**
