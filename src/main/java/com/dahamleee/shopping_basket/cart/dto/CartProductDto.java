@@ -1,8 +1,7 @@
 package com.dahamleee.shopping_basket.cart.dto;
 
-import com.dahamleee.shopping_basket.cart.domain.CartProduct;
 import com.dahamleee.shopping_basket.product.domain.DeliveryType;
-import com.dahamleee.shopping_basket.product.domain.Product;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,18 +19,15 @@ public class CartProductDto {
     private int count; // 구매 수량
     private int totalPrice; // 구매 금액
 
-    public CartProductDto(CartProduct cartProduct) {
-        Product findProduct = cartProduct.getProduct();
-
-        this.cartProductId = cartProduct.getId();
-
-        this.productId = findProduct.getId();
-        this.name = findProduct.getName();
-        this.deliveryType = findProduct.getDeliveryType();
-
-        this.cartPrice = cartProduct.getCartPrice();
-        this.count = cartProduct.getCount();
-        this.totalPrice = this.cartPrice * this.count;
+    @QueryProjection
+    public CartProductDto(Long cartProductId, Long productId, String name, DeliveryType deliveryType, int cartPrice, int count) {
+        this.cartProductId = cartProductId;
+        this.productId = productId;
+        this.name = name;
+        this.deliveryType = deliveryType;
+        this.cartPrice = cartPrice;
+        this.count = count;
+        this.totalPrice = cartPrice * count;
     }
 
 }
