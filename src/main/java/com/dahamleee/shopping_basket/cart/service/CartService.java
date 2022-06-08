@@ -1,10 +1,10 @@
 package com.dahamleee.shopping_basket.cart.service;
 
-import com.dahamleee.shopping_basket.cart.domain.Cart;
+import com.dahamleee.shopping_basket.cart.dto.CartDto;
 
 public interface CartService {
 
-    Cart findFirstCart();
+    CartDto findFirstCartDto();
 
     int addCartProduct(Long productId);
 }

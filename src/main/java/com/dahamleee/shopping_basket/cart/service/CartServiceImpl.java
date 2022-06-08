@@ -2,6 +2,7 @@ package com.dahamleee.shopping_basket.cart.service;
 
 import com.dahamleee.shopping_basket.cart.domain.Cart;
 import com.dahamleee.shopping_basket.cart.domain.CartProduct;
+import com.dahamleee.shopping_basket.cart.dto.CartDto;
 import com.dahamleee.shopping_basket.cart.repository.CartRepository;
 import com.dahamleee.shopping_basket.exception.CartNotFoundException;
 import com.dahamleee.shopping_basket.exception.ProductNotFoundException;
@@ -19,8 +20,8 @@ public class CartServiceImpl implements CartService {
     private final ProductRepository productRepository;
 
     @Override
-    public Cart findFirstCart() {
-        return cartRepository.findFirstCart()
+    public CartDto findFirstCartDto() {
+        return cartRepository.findFirstCartDto()
                 .orElseThrow(() -> new CartNotFoundException("장바구니가 정상적으로 생성되어있지 않습니다."));
     }
 

@@ -1,6 +1,6 @@
 package com.dahamleee.shopping_basket.cart.controller;
 
-import com.dahamleee.shopping_basket.cart.domain.Cart;
+import com.dahamleee.shopping_basket.cart.dto.CartDto;
 import com.dahamleee.shopping_basket.cart.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ public class CartController {
 
     @GetMapping("/carts")
     public String carts(Model model) {
-        Cart findCart = cartService.findFirstCart();
+        CartDto findCart = cartService.findFirstCartDto();
 
         model.addAttribute("cart", findCart);
 

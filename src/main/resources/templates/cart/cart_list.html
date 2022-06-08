@@ -16,13 +16,27 @@
 
     <h3 class="m-2">장바구니</h3>
 
-    <!-- 상품 목록하고 -->
-    <div th:object="${cart}">
-        <div th:text="${cart.getCartProducts}">
-        </div>
-    </div>
-
-    <!-- 그 다음 전체 결과로 가자 -->
+    <!-- 상품 목록 -->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>배송</th>
+            <th>상품명</th>
+            <th>판매가</th>
+            <th>구매수량</th>
+            <th>구매금액</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${cart.getCartProducts()}">
+            <td th:text="${item.deliveryType}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.cartPrice}"></td>
+            <td th:text="${item.count}"></td>
+            <td th:text="${item.totalPrice}"></td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 
