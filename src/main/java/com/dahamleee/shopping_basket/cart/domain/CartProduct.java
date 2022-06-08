@@ -105,6 +105,7 @@ public class CartProduct {
         return "CartProduct{" +
                 "id=" + id +
                 ", cart=" + cart +
+                ", product=" + product +
                 ", cartPrice=" + cartPrice +
                 ", count=" + count +
                 '}';
