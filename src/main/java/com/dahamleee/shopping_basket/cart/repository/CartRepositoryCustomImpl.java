@@ -4,6 +4,7 @@ import com.dahamleee.shopping_basket.cart.domain.*;
 import com.dahamleee.shopping_basket.cart.dto.CartDto;
 import com.dahamleee.shopping_basket.cart.dto.CartProductDto;
 import com.dahamleee.shopping_basket.cart.dto.QCartProductDto;
+import com.dahamleee.shopping_basket.product.dto.QProductDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -45,12 +46,15 @@ public class CartRepositoryCustomImpl implements CartRepositoryCustom {
         return queryFactory
                 .select(new QCartProductDto(
                         cartProduct.id,
-                        cartProduct.product.id,
-                        cartProduct.product.name,
-                        cartProduct.product.deliveryType,
                         cartProduct.cartPrice,
                         cartProduct.count,
-                        cartProduct.checked))
+                        cartProduct.checked,
+                        new QProductDto(
+                                cartProduct.product.id,
+                                cartProduct.product.name,
+                                cartProduct.product.price,
+                                cartProduct.product.quantity,
+                                cartProduct.product.deliveryType)))
                 .from(cartProduct)
                 .where(cartProduct.cart.eq(cart))
                 .fetch();

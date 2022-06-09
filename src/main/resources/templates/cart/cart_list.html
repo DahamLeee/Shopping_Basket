@@ -33,11 +33,14 @@
             <tr th:each="item: ${cart.ssgProducts()}">
                 <td>
                     <label>
-                        <input type="checkbox" name="cartProduct" th:value="${item.cartProductId}"
-                               th:checked="${item.checked}">
+                        <input type="checkbox" name="cartProduct"
+                               th:value="${item.cartProductId}"
+                               th:checked="${item.checked}"
+                        >
                     </label>
                 </td>
-                <td th:text="${item.name}"></td>
+                <td th:if="${item.isSoldOut()}" th:text="|${item.productDto.name} (품절)|"></td>
+                <td th:if="!${item.isSoldOut()}" th:text="${item.productDto.name}"></td>
                 <td th:text="${item.cartPrice}"></td>
                 <td th:text="${item.count}"></td>
                 <td th:text="${item.totalPrice}"></td>
@@ -61,11 +64,13 @@
             <tr th:each="item: ${cart.dawnProducts()}">
                 <td>
                     <label>
-                        <input type="checkbox" name="cartProduct" th:value="${item.cartProductId}"
+                        <input type="checkbox" name="cartProduct"
+                               th:value="${item.cartProductId}"
                                th:checked="${item.checked}">
                     </label>
                 </td>
-                <td th:text="${item.name}"></td>
+                <td th:if="${item.isSoldOut()}" th:text="|${item.productDto.name} (품절)|"></td>
+                <td th:if="!${item.isSoldOut()}" th:text="${item.productDto.name}"></td>
                 <td th:text="${item.cartPrice}"></td>
                 <td th:text="${item.count}"></td>
                 <td th:text="${item.totalPrice}"></td>
@@ -89,11 +94,14 @@
             <tr th:each="item: ${cart.normalProducts()}">
                 <td>
                     <label>
-                        <input type="checkbox" name="cartProduct" th:value="${item.cartProductId}"
-                               th:checked="${item.checked}">
+                        <input type="checkbox" name="cartProduct"
+                               th:value="${item.cartProductId}"
+                               th:checked="${item.checked}"
+                        >
                     </label>
                 </td>
-                <td th:text="${item.name}"></td>
+                <td th:if="${item.isSoldOut()}" th:text="|${item.productDto.name} (품절)|"></td>
+                <td th:if="!${item.isSoldOut()}" th:text="${item.productDto.name}"></td>
                 <td th:text="${item.cartPrice}"></td>
                 <td th:text="${item.count}"></td>
                 <td th:text="${item.totalPrice}"></td>
