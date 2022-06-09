@@ -38,6 +38,7 @@ public class CartDto {
 
     public int totalPrice() {
         return cartProducts.stream()
+                .filter(CartProductDto::isChecked)
                 .mapToInt(CartProductDto::getTotalPrice)
                 .reduce(0, Integer::sum);
     }

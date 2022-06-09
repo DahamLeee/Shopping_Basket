@@ -49,7 +49,8 @@ public class CartRepositoryCustomImpl implements CartRepositoryCustom {
                         cartProduct.product.name,
                         cartProduct.product.deliveryType,
                         cartProduct.cartPrice,
-                        cartProduct.count))
+                        cartProduct.count,
+                        cartProduct.checked))
                 .from(cartProduct)
                 .where(cartProduct.cart.eq(cart))
                 .fetch();

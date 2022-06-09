@@ -83,4 +83,13 @@ class CartProductTest {
         );
     }
 
+    @Test
+    @DisplayName("장바구니의 체크 상태를 변경하는 테스트")
+    void changeCheckStatus() {
+        CartProduct cartProduct = CartProduct.createCartProduct(Product.of("A1", 1_000, 1, DeliveryType.DAWN), 1_000);
+
+        cartProduct.changeCheckStatus();
+
+        assertThat(cartProduct.isChecked()).isTrue();
+    }
 }

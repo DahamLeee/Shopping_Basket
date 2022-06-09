@@ -19,8 +19,10 @@ public class CartProductDto {
     private int count; // 구매 수량
     private int totalPrice; // 구매 금액
 
+    private boolean checked;
+
     @QueryProjection
-    public CartProductDto(Long cartProductId, Long productId, String name, DeliveryType deliveryType, int cartPrice, int count) {
+    public CartProductDto(Long cartProductId, Long productId, String name, DeliveryType deliveryType, int cartPrice, int count, boolean checked) {
         this.cartProductId = cartProductId;
         this.productId = productId;
         this.name = name;
@@ -28,6 +30,7 @@ public class CartProductDto {
         this.cartPrice = cartPrice;
         this.count = count;
         this.totalPrice = cartPrice * count;
+        this.checked = checked;
     }
 
 }
