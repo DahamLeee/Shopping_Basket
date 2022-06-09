@@ -1,5 +1,6 @@
 package com.dahamleee.shopping_basket.product.dto;
 
+import com.dahamleee.shopping_basket.product.domain.DeliveryType;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,16 +14,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductDto {
 
+    private static final int NO_STOCK = 0;
+
     private Long productId;
     private String name;
     private int price;
     private int quantity;
+    private DeliveryType deliveryType;
     
     @QueryProjection
-    public ProductDto(Long productId, String name, int price, int quantity) {
+    public ProductDto(Long productId, String name, int price, int quantity, DeliveryType deliveryType) {
         this.productId = productId;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.deliveryType = deliveryType;
+    }
+
+    public boolean isSoldOut() {
+        return quantity == NO_STOCK;
     }
 }

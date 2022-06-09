@@ -11,4 +11,8 @@ public enum DeliveryType {
     DeliveryType(String keyword) {
         this.keyword = keyword;
     }
+
+    public String getKeyword() {
+        return keyword;
+    }
 }

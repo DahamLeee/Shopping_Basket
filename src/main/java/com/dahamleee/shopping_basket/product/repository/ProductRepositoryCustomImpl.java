@@ -27,7 +27,8 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
                         product.id.as("productId"),
                         product.name,
                         product.price,
-                        product.quantity
+                        product.quantity,
+                        product.deliveryType
                 ))
                 .from(product)
                 .offset(pageable.getOffset())

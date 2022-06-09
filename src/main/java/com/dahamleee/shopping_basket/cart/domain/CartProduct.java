@@ -32,11 +32,13 @@ public class CartProduct {
 
     private int cartPrice;
     private int count;
+    private boolean checked;
 
     private CartProduct(Product product, int cartPrice, int count) {
         this.product = product;
         this.cartPrice = cartPrice;
         this.count = count;
+        this.checked = false;
     }
 
     private CartProduct(Product product, int cartPrice) {
@@ -100,6 +102,14 @@ public class CartProduct {
         }
     }
 
+    public boolean isSameProduct(CartProduct cartProduct) {
+        return this.product.equals(cartProduct.product);
+    }
+
+    public void changeCheckStatus() {
+        this.checked = !checked;
+    }
+
     @Override
     public String toString() {
         return "CartProduct{" +
@@ -109,9 +119,5 @@ public class CartProduct {
                 ", cartPrice=" + cartPrice +
                 ", count=" + count +
                 '}';
-    }
-
-    public boolean isSameProduct(CartProduct cartProduct) {
-        return this.product.equals(cartProduct.product);
     }
 }
