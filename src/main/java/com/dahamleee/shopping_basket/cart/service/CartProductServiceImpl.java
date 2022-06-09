@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CartProductServiceImpl implements CartProductService {
@@ -20,5 +22,11 @@ public class CartProductServiceImpl implements CartProductService {
                 .orElseThrow(() -> new CartProductNotFoundException("존재하지 않는 장바구니 상품입니다."));
 
         cartProduct.changeCheckStatus();
+    }
+
+    @Override
+    @Transactional
+    public void removeCartProductsByIds(List<Long> cartProductIds) {
+        cartProductRepository.removeCartProductsByIds(cartProductIds);
     }
 }
