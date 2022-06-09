@@ -7,4 +7,6 @@ public interface CartService {
     CartDto findFirstCartDto();
 
     int addCartProduct(Long productId);
+
+    int cartProductCount();
 }

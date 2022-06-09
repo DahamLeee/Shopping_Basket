@@ -67,4 +67,8 @@ public class CartDto {
                 .mapToInt(CartProductDto::getTotalPrice)
                 .reduce(0, Integer::sum);
     }
+
+    public int cartProductCount() {
+        return cartProducts.size();
+    }
 }

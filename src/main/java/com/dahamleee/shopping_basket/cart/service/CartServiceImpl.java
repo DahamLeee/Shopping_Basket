@@ -37,4 +37,9 @@ public class CartServiceImpl implements CartService {
         return cart.addCartProduct(CartProduct.createCartProduct(findProduct, findProduct.getPrice()));
     }
 
+    @Override
+    public int cartProductCount() {
+        return findFirstCartDto().cartProductCount();
+    }
+
 }
