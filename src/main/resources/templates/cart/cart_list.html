@@ -16,6 +16,10 @@
 
     <h3 class="m-2">장바구니</h3>
 
+    <div class="d-flex flex-row-reverse">
+        <button class="btn btn-outline-dark" onclick="delCheckCartProduct()">선택 삭제</button>
+    </div>
+
     <div id="cartProductTable">
         <!-- 상품 목록 -->
         <table th:if="!${cart.ssgProducts().isEmpty()}"
@@ -114,6 +118,7 @@
 
         <script th:inline="javascript">
             var checkboxes = document.querySelectorAll("input[type=checkbox][name=cartProduct]");
+            var checkedBoxes = document.querySelectorAll("input[type=checkbox][name=cartProduct]:checked");
 
             checkboxes.forEach(function (checkbox) {
                 checkbox.addEventListener('change', function () {
@@ -128,6 +133,30 @@
                         });
                 });
             });
+
+            function delCheckCartProduct() {
+                if (checkedBoxes.length === 0) {
+                    alert("선택된 상품이 없습니다.");
+                    return;
+                }
+
+                let checkedList = [];
+                checkedBoxes.forEach(function (checkbox) {
+                    checkedList.push(checkbox.value);
+                });
+
+                $.ajax({
+                    url: "/carts/cartProducts/out",
+                    type: "POST",
+                    data: {
+                        checkedList: checkedList
+                    }
+                })
+                    .done(function (result) {
+                        alert("장바구니 상품이 삭제되었습니다");
+                        $("#cartProductTable").replaceWith(result);
+                    });
+            }
         </script>
     </div>
 </div>
