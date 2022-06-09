@@ -3,6 +3,7 @@
 <div th:fragment="productCardFragment(product)">
     <div class="product-card h-100 py-2">
         <div class="card-body">
+            <span class="badge badge-success text-xs" th:text="${product.deliveryType.keyword}"></span>
             <div class="d-flex no-gutters align-item align-items-center mb-3">
                 <div class="col me-2">
                     <div class="text-xs text-muted" th:text="${product.name}"></div>

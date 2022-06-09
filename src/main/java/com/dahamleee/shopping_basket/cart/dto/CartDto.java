@@ -56,7 +56,7 @@ public class CartDto {
     private int allCartProductsPrice() {
         return cartProducts.stream()
                 .filter(cartProductDto -> !cartProductDto.isSoldOut())
-                .mapToInt(CartProductDto::getCartPrice)
+                .mapToInt(CartProductDto::getTotalPrice)
                 .reduce(0, Integer::sum);
     }
 
