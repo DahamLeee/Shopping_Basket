@@ -100,6 +100,10 @@ public class CartProduct {
         }
     }
 
+    public boolean isSameProduct(CartProduct cartProduct) {
+        return this.product.equals(cartProduct.product);
+    }
+
     @Override
     public String toString() {
         return "CartProduct{" +
@@ -109,9 +113,5 @@ public class CartProduct {
                 ", cartPrice=" + cartPrice +
                 ", count=" + count +
                 '}';
-    }
-
-    public boolean isSameProduct(CartProduct cartProduct) {
-        return this.product.equals(cartProduct.product);
     }
 }
