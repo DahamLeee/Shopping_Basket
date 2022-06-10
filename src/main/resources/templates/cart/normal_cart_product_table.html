@@ -25,9 +25,9 @@
         <td th:if="!${item.isSoldOut()}" th:text="${item.productDto.name}"></td>
         <td th:text="${item.cartPrice}"></td>
         <td class="input-group m-0">
-            <input type="button" value="-" class="button-minus" data-field="quantity">
+            <input type="button" value="-" class="button-minus" th:attr="data-product-id=|${item.cartProductId}|">
             <label>
-                <input type="number" step="1" max="20" th:value="${item.count}" name="quantity" class="quantity-field"
+                <input th:id="|${item.cartProductId}|" type="number" step="1" max="20" th:value="${item.count}" name="quantity" class="quantity-field"
                        th:cartProductId="${item.cartProductId}"
                        th:currentCartProductCount="${item.count}"
                        th:productQuantity="${item.productDto.quantity}"
@@ -38,7 +38,7 @@
                             this)"
                 >
             </label>
-            <input type="button" value="+" class="button-plus" data-field="quantity">
+            <input type="button" value="+" class="button-plus" th:attr="data-product-id=|${item.cartProductId}|">
         </td>
         <td th:text="${item.totalPrice}"></td>
     </tr>

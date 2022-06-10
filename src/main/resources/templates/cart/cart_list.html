@@ -109,6 +109,40 @@
                 })
             }
 
+            function incrementValue(e) {
+                e.preventDefault();
+                var cartProductId = $(e.target).data('product-id');
+                var parent = $(e.target).closest('div');
+                var currentVal = parseInt(parent.find('input[id=' + cartProductId + ']').val(), 10);
+
+                if (!isNaN(currentVal)) {
+                    parent.find('input[id=' + cartProductId + ']').val(currentVal + 1);
+                } else {
+                    parent.find('input[id=' + cartProductId + ']').val(0);
+                }
+            }
+
+            function decrementValue(e) {
+                e.preventDefault();
+                var cartProductId = $(e.target).data('product-id');
+                var parent = $(e.target).closest('div');
+                var currentVal = parseInt(parent.find('input[id=' + cartProductId + ']').val(), 10);
+
+                if (!isNaN(currentVal) && currentVal > 1) {
+                    parent.find('input[id=' + cartProductId + ']').val(currentVal - 1);
+                } else {
+                    parent.find('input[id=' + cartProductId + ']').val(1);
+                }
+            }
+
+            let $input = $(".input-group");
+            $input.on('click', '.button-plus', function (e) {
+                incrementValue(e);
+            });
+
+            $input.on('click', '.button-minus', function (e) {
+                decrementValue(e);
+            });
             // + button handler
         </script>
     </div>
