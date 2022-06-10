@@ -70,7 +70,7 @@ public class CartController {
         return "cart/cart_list :: #cartProductTable";
     }
 
-    @PostMapping("/carts/cartProducts/{cartProductId}/increment")
+    @PostMapping("/carts/cartProducts/{cartProductId}/decrement")
     public String decrementCartProductCount(
             @PathVariable Long cartProductId,
             Model model) {
