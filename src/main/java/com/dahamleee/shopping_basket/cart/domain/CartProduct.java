@@ -87,6 +87,7 @@ public class CartProduct {
     public void inputCount(int count) {
         isMaxCartCount(count);
         isMinCartCount(count);
+        product.maxQuantity(count);
         this.count = count;
     }
 

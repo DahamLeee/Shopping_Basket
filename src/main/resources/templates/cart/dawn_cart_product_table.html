@@ -1,0 +1,49 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<table th:fragment="dawnCartProductTable(products)" th:if="!${products.isEmpty()}" class="table">
+    <thead>
+    <tr class="bg-info">
+        <th class="col-md-1">새벽 배송</th>
+        <th class="col-md-6">상품명</th>
+        <th class="col-md-1">판매가</th>
+        <th class="col-md-2">구매수량</th>
+        <th class="col-md-1">구매금액</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="item: ${products}">
+        <td>
+            <label>
+                <input type="checkbox" name="cartProduct"
+                       th:value="${item.cartProductId}"
+                       th:checked="${item.checked}"
+                >
+            </label>
+        </td>
+        <td th:if="${item.isSoldOut()}" th:text="|${item.productDto.name} (품절)|"></td>
+        <td th:if="!${item.isSoldOut()}" th:text="${item.productDto.name}"></td>
+        <td th:text="${item.cartPrice}"></td>
+        <td class="input-group m-0">
+            <input type="button" value="-" class="button-minus" data-field="quantity">
+            <label>
+                <input type="number" step="1" max="20" th:value="${item.count}" name="quantity" class="quantity-field"
+                       th:cartProductId="${item.cartProductId}"
+                       th:currentCartProductCount="${item.count}"
+                       th:productQuantity="${item.productDto.quantity}"
+                       th:onchange="productCountChange(
+                            this.getAttribute('cartProductId'),
+                            this.getAttribute('currentCartProductCount'),
+                            this.getAttribute('productQuantity'),
+                            this)"
+                >
+            </label>
+            <input type="button" value="+" class="button-plus" data-field="quantity">
+        </td>
+        <td th:text="${item.totalPrice}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</html>

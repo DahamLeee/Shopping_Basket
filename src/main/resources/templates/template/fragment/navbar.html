@@ -48,13 +48,30 @@
                     <a class="no-decoration-a-black" th:href="@{/carts}">
                         <i class="fas fa-shopping-cart fa-2x">
                             <!-- ajax call-->
-                            <span class="badge rounded-pill badge-notification bg-danger">99</span>
+                            <span id="cartProductCount" class="badge rounded-pill badge-notification bg-danger"></span>
                         </i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(function() {
+            $.ajax({
+                type: "GET",
+                url: "/api/cart/cartProductCount",
+                data: {},
+                dataType: "json",
+                success: (data) => {
+                    $("#cartProductCount").text(data);
+                },
+                error: (jqXHR) => {
+                    alert(jqXHR);
+                }
+            })
+        })
+    </script>
 </div>
 
 </html>

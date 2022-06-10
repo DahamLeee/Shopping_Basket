@@ -6,9 +6,9 @@ import com.dahamleee.shopping_basket.cart.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,6 +31,27 @@ public class CartController {
         cartProductService.changeCartProductCheckStatus(cartProductId);
 
         CartDto findCart = cartService.findFirstCartDto();
+        model.addAttribute("cart", findCart);
+
+        return "cart/cart_list :: #cartProductTable";
+    }
+
+    @PostMapping("/carts/cartProducts/out")
+    public String removeCartProducts(@RequestParam(value = "checkedList[]") List<Long> cartProductIds) {
+        cartProductService.removeCartProductsByIds(cartProductIds); // query
+
+        return "redirect:/carts";
+    }
+
+    @PostMapping("/carts/cartProducts/{cartProductId}")
+    public String changeCartProductsCount(
+            @PathVariable Long cartProductId,
+            @RequestParam("cartProductCount") int cartProductCount,
+            Model model) {
+
+        cartProductService.changeCartProductCount(cartProductId, cartProductCount);
+
+        CartDto findCart = cartService.findFirstCartDto(); // result
         model.addAttribute("cart", findCart);
 
         return "cart/cart_list :: #cartProductTable";
