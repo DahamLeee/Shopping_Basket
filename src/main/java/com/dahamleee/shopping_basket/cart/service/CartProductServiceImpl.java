@@ -18,15 +18,24 @@ public class CartProductServiceImpl implements CartProductService {
     @Override
     @Transactional
     public void changeCartProductCheckStatus(Long cartProductId) {
-        CartProduct cartProduct = cartProductRepository.findCartProductById(cartProductId)
+        CartProduct findCartProduct = cartProductRepository.findById(cartProductId)
                 .orElseThrow(() -> new CartProductNotFoundException("존재하지 않는 장바구니 상품입니다."));
 
-        cartProduct.changeCheckStatus();
+        findCartProduct.changeCheckStatus();
     }
 
     @Override
     @Transactional
     public void removeCartProductsByIds(List<Long> cartProductIds) {
         cartProductRepository.removeCartProductsByIds(cartProductIds);
+    }
+
+    @Override
+    @Transactional
+    public void changeCartProductCount(Long cartProductId, int cartProductCount) {
+        CartProduct findCartProduct = cartProductRepository.findCartProductById(cartProductId)
+                .orElseThrow(() -> new CartProductNotFoundException("존재하지 않는 장바구니 상품입니다."));
+
+        findCartProduct.inputCount(cartProductCount);
     }
 }

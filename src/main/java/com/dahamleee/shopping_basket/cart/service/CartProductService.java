@@ -7,4 +7,6 @@ public interface CartProductService {
     void changeCartProductCheckStatus(Long cartProductId);
 
     void removeCartProductsByIds(List<Long> cartProductIds);
+
+    void changeCartProductCount(Long cartProductId, int cartProductCount);
 }
