@@ -43,4 +43,17 @@ public class CartController {
         return "redirect:/carts";
     }
 
+    @PostMapping("/carts/cartProducts/{cartProductId}")
+    public String changeCartProductsCount(
+            @PathVariable Long cartProductId,
+            @RequestParam("cartProductCount") int cartProductCount,
+            Model model) {
+
+        cartProductService.changeCartProductCount(cartProductId, cartProductCount);
+
+        CartDto findCart = cartService.findFirstCartDto(); // result
+        model.addAttribute("cart", findCart);
+
+        return "cart/cart_list :: #cartProductTable";
+    }
 }

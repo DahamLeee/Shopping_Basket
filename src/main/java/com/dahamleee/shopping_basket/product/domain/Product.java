@@ -1,5 +1,6 @@
 package com.dahamleee.shopping_basket.product.domain;
 
+import com.dahamleee.shopping_basket.exception.CartProductCountMaximumException;
 import com.dahamleee.shopping_basket.exception.NotEnoughProductException;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -65,5 +66,11 @@ public class Product {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 '}';
+    }
+
+    public void maxQuantity(int count) {
+        if (quantity < count) {
+            throw new CartProductCountMaximumException("최대 주문 수량은 " + quantity + "개 입니다.");
+        }
     }
 }
