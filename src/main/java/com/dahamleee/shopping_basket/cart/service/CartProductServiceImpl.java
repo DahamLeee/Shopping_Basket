@@ -38,4 +38,13 @@ public class CartProductServiceImpl implements CartProductService {
 
         findCartProduct.inputCount(cartProductCount);
     }
+
+    @Override
+    @Transactional
+    public void incrementCartProduct(Long cartProductId) {
+        CartProduct findCartProduct = cartProductRepository.findById(cartProductId)
+                .orElseThrow(() -> new CartProductNotFoundException("존재하지 않는 장바구니 상품입니다."));
+
+        findCartProduct.increaseCount();
+    }
 }

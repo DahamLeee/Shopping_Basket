@@ -9,4 +9,6 @@ public interface CartProductService {
     void removeCartProductsByIds(List<Long> cartProductIds);
 
     void changeCartProductCount(Long cartProductId, int cartProductCount);
+
+    void incrementCartProduct(Long cartProductId);
 }
