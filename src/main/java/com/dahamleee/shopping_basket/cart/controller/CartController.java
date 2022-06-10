@@ -69,4 +69,17 @@ public class CartController {
 
         return "cart/cart_list :: #cartProductTable";
     }
+
+    @PostMapping("/carts/cartProducts/{cartProductId}/increment")
+    public String decrementCartProductCount(
+            @PathVariable Long cartProductId,
+            Model model) {
+
+        cartProductService.decrementCartProduct(cartProductId);
+
+        CartDto findCart = cartService.findFirstCartDto();
+        model.addAttribute("cart", findCart);
+
+        return "cart/cart_list :: #cartProductTable";
+    }
 }

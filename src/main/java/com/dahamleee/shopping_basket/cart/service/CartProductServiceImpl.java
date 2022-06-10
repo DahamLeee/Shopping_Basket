@@ -18,9 +18,7 @@ public class CartProductServiceImpl implements CartProductService {
     @Override
     @Transactional
     public void changeCartProductCheckStatus(Long cartProductId) {
-        CartProduct findCartProduct = cartProductRepository.findById(cartProductId)
-                .orElseThrow(() -> new CartProductNotFoundException("존재하지 않는 장바구니 상품입니다."));
-
+        CartProduct findCartProduct = findOnlyCartProductById(cartProductId);
         findCartProduct.changeCheckStatus();
     }
 
@@ -42,9 +40,19 @@ public class CartProductServiceImpl implements CartProductService {
     @Override
     @Transactional
     public void incrementCartProduct(Long cartProductId) {
-        CartProduct findCartProduct = cartProductRepository.findById(cartProductId)
-                .orElseThrow(() -> new CartProductNotFoundException("존재하지 않는 장바구니 상품입니다."));
-
+        CartProduct findCartProduct = findOnlyCartProductById(cartProductId);
         findCartProduct.increaseCount();
+    }
+
+    @Override
+    @Transactional
+    public void decrementCartProduct(Long cartProductId) {
+        CartProduct findCartProduct = findOnlyCartProductById(cartProductId);
+        findCartProduct.decreaseCount();
+    }
+
+    private CartProduct findOnlyCartProductById(Long cartProductId) {
+        return cartProductRepository.findById(cartProductId)
+                .orElseThrow(() -> new CartProductNotFoundException("존재하지 않는 장바구니 상품입니다."));
     }
 }

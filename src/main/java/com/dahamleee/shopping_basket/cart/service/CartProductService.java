@@ -11,4 +11,6 @@ public interface CartProductService {
     void changeCartProductCount(Long cartProductId, int cartProductCount);
 
     void incrementCartProduct(Long cartProductId);
+
+    void decrementCartProduct(Long cartProductId);
 }
