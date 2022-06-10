@@ -1,0 +1,34 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<table th:fragment="dawnCartProductTable(products)" th:if="!${products.isEmpty()}" class="table">
+    <thead>
+    <tr class="bg-info">
+        <th class="col-md-1">새벽 배송</th>
+        <th class="col-md-6">상품명</th>
+        <th class="col-md-1">판매가</th>
+        <th class="col-md-1">구매수량</th>
+        <th class="col-md-1">구매금액</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="item: ${products}">
+        <td>
+            <label>
+                <input type="checkbox" name="cartProduct"
+                       th:value="${item.cartProductId}"
+                       th:checked="${item.checked}"
+                >
+            </label>
+        </td>
+        <td th:if="${item.isSoldOut()}" th:text="|${item.productDto.name} (품절)|"></td>
+        <td th:if="!${item.isSoldOut()}" th:text="${item.productDto.name}"></td>
+        <td th:text="${item.cartPrice}"></td>
+        <td th:text="${item.count}"></td>
+        <td th:text="${item.totalPrice}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</html>

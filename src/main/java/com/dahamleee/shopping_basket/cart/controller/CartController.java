@@ -37,13 +37,10 @@ public class CartController {
     }
 
     @PostMapping("/carts/cartProducts/out")
-    public String removeCartProducts(@RequestParam(value = "checkedList[]") List<Long> cartProductIds, Model model) {
+    public String removeCartProducts(@RequestParam(value = "checkedList[]") List<Long> cartProductIds) {
         cartProductService.removeCartProductsByIds(cartProductIds); // query
 
-        CartDto findCart = cartService.findFirstCartDto(); // result
-        model.addAttribute("cart", findCart);
-
-        return "cart/cart_list :: #cartProductTable";
+        return "redirect:/carts";
     }
 
 }

@@ -16,102 +16,17 @@
 
     <h3 class="m-2">장바구니</h3>
 
-    <div class="d-flex flex-row-reverse">
+    <div class="d-flex flex-row-reverse mb-2">
         <button class="btn btn-outline-dark" onclick="delCheckCartProduct()">선택 삭제</button>
     </div>
 
     <div id="cartProductTable">
         <!-- 상품 목록 -->
-        <table th:if="!${cart.ssgProducts().isEmpty()}"
-               class="table table-striped">
-            <thead>
-            <tr>
-                <th class="col-md-1">쓱배송</th>
-                <th class="col-md-6">상품명</th>
-                <th class="col-md-1">판매가</th>
-                <th class="col-md-1">구매수량</th>
-                <th class="col-md-1">구매금액</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item: ${cart.ssgProducts()}">
-                <td>
-                    <label>
-                        <input type="checkbox" name="cartProduct"
-                               th:value="${item.cartProductId}"
-                               th:checked="${item.checked}"
-                        >
-                    </label>
-                </td>
-                <td th:if="${item.isSoldOut()}" th:text="|${item.productDto.name} (품절)|"></td>
-                <td th:if="!${item.isSoldOut()}" th:text="${item.productDto.name}"></td>
-                <td th:text="${item.cartPrice}"></td>
-                <td th:text="${item.count}"></td>
-                <td th:text="${item.totalPrice}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <div th:replace="~{cart/ssg_cart_product_table :: ssgCartProductTable(${cart.ssgProducts()})}"></div>
         <br>
-
-        <table th:if="!${cart.dawnProducts().isEmpty()}"
-               class="table table-striped">
-            <thead>
-            <tr>
-                <th class="col-md-1">새벽 배송</th>
-                <th class="col-md-6">상품명</th>
-                <th class="col-md-1">판매가</th>
-                <th class="col-md-1">구매수량</th>
-                <th class="col-md-1">구매금액</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item: ${cart.dawnProducts()}">
-                <td>
-                    <label>
-                        <input type="checkbox" name="cartProduct"
-                               th:value="${item.cartProductId}"
-                               th:checked="${item.checked}">
-                    </label>
-                </td>
-                <td th:if="${item.isSoldOut()}" th:text="|${item.productDto.name} (품절)|"></td>
-                <td th:if="!${item.isSoldOut()}" th:text="${item.productDto.name}"></td>
-                <td th:text="${item.cartPrice}"></td>
-                <td th:text="${item.count}"></td>
-                <td th:text="${item.totalPrice}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <div th:replace="~{cart/dawn_cart_product_table :: dawnCartProductTable(${cart.dawnProducts()})}"></div>
         <br>
-
-        <table th:if="!${cart.normalProducts().isEmpty()}"
-               class="table table-striped">
-            <thead>
-            <tr>
-                <th class="col-md-1">일반 배송</th>
-                <th class="col-md-6">상품명</th>
-                <th class="col-md-1">판매가</th>
-                <th class="col-md-1">구매수량</th>
-                <th class="col-md-1">구매금액</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item: ${cart.normalProducts()}">
-                <td>
-                    <label>
-                        <input type="checkbox" name="cartProduct"
-                               th:value="${item.cartProductId}"
-                               th:checked="${item.checked}"
-                        >
-                    </label>
-                </td>
-                <td th:if="${item.isSoldOut()}" th:text="|${item.productDto.name} (품절)|"></td>
-                <td th:if="!${item.isSoldOut()}" th:text="${item.productDto.name}"></td>
-                <td th:text="${item.cartPrice}"></td>
-                <td th:text="${item.count}"></td>
-                <td th:text="${item.totalPrice}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <div th:replace="~{cart/normal_cart_product_table :: normalCartProductTable(${cart.normalProducts()})}"></div>
         <br>
 
         <div class="d-flex flex-row-reverse font-weight-bold" th:text="|결정예정금액 : ${cart.totalPrice()}원|"></div>
@@ -152,9 +67,9 @@
                         checkedList: checkedList
                     }
                 })
-                    .done(function (result) {
+                    .done(function () {
                         alert("장바구니 상품이 삭제되었습니다");
-                        $("#cartProductTable").replaceWith(result);
+                        location.href = "/carts"
                     });
             }
         </script>
