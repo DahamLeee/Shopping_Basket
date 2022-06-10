@@ -6,7 +6,7 @@
         <th class="col-md-1">일반 배송</th>
         <th class="col-md-6">상품명</th>
         <th class="col-md-1">판매가</th>
-        <th class="col-md-1">구매수량</th>
+        <th class="col-md-2">구매수량</th>
         <th class="col-md-1">구매금액</th>
     </tr>
     </thead>
@@ -24,7 +24,22 @@
         <td th:if="${item.isSoldOut()}" th:text="|${item.productDto.name} (품절)|"></td>
         <td th:if="!${item.isSoldOut()}" th:text="${item.productDto.name}"></td>
         <td th:text="${item.cartPrice}"></td>
-        <td th:text="${item.count}"></td>
+        <td class="input-group m-0">
+            <input type="button" value="-" class="button-minus" data-field="quantity">
+            <label>
+                <input type="number" step="1" max="20" th:value="${item.count}" name="quantity" class="quantity-field"
+                       th:cartProductId="${item.cartProductId}"
+                       th:currentCartProductCount="${item.count}"
+                       th:productQuantity="${item.productDto.quantity}"
+                       th:onchange="productCountChange(
+                            this.getAttribute('cartProductId'),
+                            this.getAttribute('currentCartProductCount'),
+                            this.getAttribute('productQuantity'),
+                            this)"
+                >
+            </label>
+            <input type="button" value="+" class="button-plus" data-field="quantity">
+        </td>
         <td th:text="${item.totalPrice}"></td>
     </tr>
     </tbody>

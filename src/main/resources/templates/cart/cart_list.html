@@ -72,6 +72,44 @@
                         location.href = "/carts"
                     });
             }
+
+            // - button handler
+
+            // count input handler
+            function productCountChange(cartProductId, currentCartProductCount, productQuantity, input) {
+                let inputCount = parseInt(input.value);
+                if (isNaN(inputCount)) { // 숫자가 아닌 값이 들어왔을 경우 원래 개수로 치환
+                    input.value = currentCartProductCount;
+                    return;
+                }
+
+                if (inputCount <= 0 || inputCount > 20) { // 0 이하, 20 초과하는 수가 들어올 경우 기본 규칙 위배
+                    input.value = currentCartProductCount;
+                    return;
+                }
+
+                if (inputCount > parseInt(productQuantity)) { // 현재 재고 이상으로 장바구니에 담을 수 없게 설계
+                    input.value = currentCartProductCount;
+                    alert("최대 주문 수량은 " + productQuantity + " 입니다.");
+                    return;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/carts/cartProducts/" + cartProductId,
+                    data: {
+                        cartProductCount: inputCount
+                    },
+                    success: (result) => {
+                        $("#cartProductTable").replaceWith(result);
+                    },
+                    error: (jqXHR) => {
+                        alert(jqXHR);
+                    }
+                })
+            }
+
+            // + button handler
         </script>
     </div>
 </div>
