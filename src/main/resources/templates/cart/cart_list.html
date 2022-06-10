@@ -144,15 +144,28 @@
             // - button handler
             function decrementValue(e) {
                 e.preventDefault();
-                var cartProductId = $(e.target).data('product-id');
-                var parent = $(e.target).closest('div');
-                var currentVal = parseInt(parent.find('input[id=' + cartProductId + ']').val(), 10);
+                var inputId = $(e.target).data('product-id'); // 플러스 버튼을 클릭한 Input 의 ID 값을 찾는다.
+                var $input = $("#" + inputId); // 찾은 ID 값을 통해 jQuery 생성
 
-                if (!isNaN(currentVal) && currentVal > 1) {
-                    parent.find('input[id=' + cartProductId + ']').val(currentVal - 1);
-                } else {
-                    parent.find('input[id=' + cartProductId + ']').val(1);
+                var currentVal = parseInt($input.val(), 10);
+                var cartProductId = $input.attr('cartProductId');
+
+                if (isNaN(currentVal) || currentVal <= 1) { // 숫자가 아니거나 1 보다 작은수로 시도할 경우
+                    $input.val(1);
+                    return;
                 }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/carts/cartProducts/" + cartProductId + "/decrement",
+                    data: {},
+                    success: (result) => {
+                        $("#cartProductTable").replaceWith(result);
+                    },
+                    error: (response) => {
+                        alert(response.responseJSON.message);
+                    }
+                })
             }
 
             var $input = $(".input-group");
