@@ -1,0 +1,31 @@
+<!-- 메인 화면 - 상품 목록 -->
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template/layout/layout_main}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="m-2">
+        <div class="layout-main-image-content">
+            <img class="layout-main-image" src="/img/main-image.jpg" alt="main-image">
+        </div>
+    </div>
+
+    <div class="content-list">
+        <div class="row">
+            <div th:each="product: ${products}" class="col-md-4 col-xxl-3 mt-5">
+                <div th:replace="product/product_card :: productCardFragment(${product})"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

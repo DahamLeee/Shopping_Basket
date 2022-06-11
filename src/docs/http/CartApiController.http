@@ -1,0 +1,4 @@
+### ADD CART Exception
+POST http://localhost:18081/api/carts/9999
+
+
