@@ -58,6 +58,12 @@ public class Product {
         this.quantity = restQuantity;
     }
 
+    public void maxQuantity(int count) {
+        if (this.quantity < count) {
+            throw new CartProductCountMaximumException("최대 주문 수량은 " + this.quantity + "개 입니다.");
+        }
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -66,11 +72,5 @@ public class Product {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 '}';
-    }
-
-    public void maxQuantity(int count) {
-        if (quantity < count) {
-            throw new CartProductCountMaximumException("최대 주문 수량은 " + quantity + "개 입니다.");
-        }
     }
 }

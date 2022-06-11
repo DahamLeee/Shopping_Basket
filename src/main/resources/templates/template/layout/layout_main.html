@@ -39,7 +39,7 @@
     function addCart(productId) {
         $.ajax({
             type: "POST",
-            url: "/api/cart/" + productId,
+            url: "/api/carts/" + productId,
             data: {},
             dataType: "json",
             success: (data) => {alert(data.message)},

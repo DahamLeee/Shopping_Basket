@@ -30,6 +30,10 @@
         <br>
 
         <div class="d-flex flex-row-reverse font-weight-bold" th:text="|결정예정금액 : ${cart.totalPrice()}원|"></div>
+        <div class="d-flex flex-row-reverse font-weight-bold">
+            <button class="btn btn-danger" th:onclick="orderCartProduct()">주문하기
+            </button>
+        </div>
 
         <script th:inline="javascript">
             var checkboxes = document.querySelectorAll("input[type=checkbox][name=cartProduct]");
@@ -73,8 +77,6 @@
                     });
             }
 
-            // - button handler
-
             // count input handler
             function productCountChange(cartProductId, currentCartProductCount, productQuantity, input) {
                 let inputCount = parseInt(input.value);
@@ -109,7 +111,123 @@
                 })
             }
 
-            // + button handler
+            // plus button event handler
+            function incrementValue(e) {
+                e.preventDefault();
+                var inputId = $(e.target).data('product-id'); // 플러스 버튼을 클릭한 Input 의 ID 값을 찾는다.
+                var $input = $("#" + inputId); // 찾은 ID 값을 통해 jQuery 생성
+
+                var currentVal = parseInt($input.val(), 10);
+                var productQuantity = $input.attr('productQuantity');
+                var cartProductId = $input.attr('cartProductId');
+
+                if (isNaN(currentVal)) { // 숫자가 아니야?
+                    $input.val(1); // 1로 설정하고
+                    return; // early return
+                }
+
+                if (currentVal >= productQuantity) { // 최대 주문 수량 Validation
+                    alert("최대 주문 수량은 " + productQuantity + " 입니다.");
+                    return;
+                }
+
+                // 그럼 여기에는 숫자이면서, 최대 수량이 아닌 값이 왔기 때문에 query 를 날려도 된다.
+                $.ajax({
+                    type: "POST",
+                    url: "/carts/cartProducts/" + cartProductId + "/increment",
+                    data: {},
+                    success: (result) => {
+                        $("#cartProductTable").replaceWith(result);
+                    },
+                    error: (jqXHR) => {
+                        alert(jqXHR);
+                    }
+                });
+            }
+
+            // minus button click event handler
+            function decrementValue(e) {
+                e.preventDefault();
+                var inputId = $(e.target).data('product-id'); // 플러스 버튼을 클릭한 Input 의 ID 값을 찾는다.
+                var $input = $("#" + inputId); // 찾은 ID 값을 통해 jQuery 생성
+
+                var currentVal = parseInt($input.val(), 10);
+                var cartProductId = $input.attr('cartProductId');
+
+                if (isNaN(currentVal) || currentVal <= 1) { // 숫자가 아니거나 1 보다 작은수로 시도할 경우
+                    $input.val(1);
+                    return;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/carts/cartProducts/" + cartProductId + "/decrement",
+                    data: {},
+                    success: (result) => {
+                        $("#cartProductTable").replaceWith(result);
+                    },
+                    error: (response) => {
+                        alert(response.responseJSON.message);
+                    }
+                })
+            }
+
+            var $input = $(".input-group");
+            $input.on('click', '.button-plus', function (e) {
+                incrementValue(e);
+            });
+
+            $input.on('click', '.button-minus', function (e) {
+                decrementValue(e);
+            });
+
+            // 주문하기 button 의 event handler
+            function orderCartProduct() {
+                if (checkedBoxes.length === 0) { // 선택된 상품이 하나도 없다면 ?
+                    // 전체 주문
+                    orderAllCartProduct();
+                    return;
+                }
+
+                orderCheckedCartProduct();
+            }
+
+            // 체크된 상품이 존재하지 않을 경우 모든 상품 주문 요청
+            function orderAllCartProduct() {
+                var cartProductIds = [];
+
+                checkboxes.forEach(function (checkbox) {
+                    cartProductIds.push(checkbox.value);
+                });
+
+                requestOrder(cartProductIds);
+            }
+
+            // 체크된 상품이 존재할 경우 체크된 상품만 주문 요청
+            function orderCheckedCartProduct() {
+                var cartProductIds = [];
+
+                checkedBoxes.forEach(function (checkbox) {
+                    cartProductIds.push(checkbox.value);
+                });
+
+                requestOrder(cartProductIds);
+            }
+
+            // ajax 를 통한 상품 주문 요청 메서드
+            function requestOrder(cartProductIds) {
+                $.ajax({
+                    url: "/api/carts/cartProducts/order",
+                    type: "POST",
+                    data: {
+                        cartProductIds: cartProductIds
+                    }
+                })
+                    .done(function (data) {
+                        alert(data.message);
+                        location.href = "/carts";
+                    })
+            }
         </script>
     </div>
 </div>
