@@ -51,6 +51,20 @@ public class CartProductServiceImpl implements CartProductService {
         findCartProduct.decreaseCount();
     }
 
+    @Override
+    @Transactional
+    public int order(List<Long> cartProductIds) {
+        List<CartProduct> findCartProducts = cartProductRepository.findCartProductsByIdsWhereNotSoldOut(cartProductIds);
+
+        int totalPrice = findCartProducts.stream()
+                .mapToInt(CartProduct::calculateTotalCartProductPrice)
+                .reduce(0, Integer::sum);
+
+        cartProductRepository.removeCartProductsByCartProducts(findCartProducts);
+
+        return totalPrice;
+    }
+
     private CartProduct findOnlyCartProductById(Long cartProductId) {
         return cartProductRepository.findById(cartProductId)
                 .orElseThrow(() -> new CartProductNotFoundException("존재하지 않는 장바구니 상품입니다."));

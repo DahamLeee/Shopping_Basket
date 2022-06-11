@@ -10,4 +10,8 @@ public interface CartProductRepositoryCustom {
     Optional<CartProduct> findCartProductById(Long cartProductId);
 
     void removeCartProductsByIds(List<Long> cartProductIds);
+
+    List<CartProduct> findCartProductsByIdsWhereNotSoldOut(List<Long> cartProductIds);
+
+    void removeCartProductsByCartProducts(List<CartProduct> cartProducts);
 }

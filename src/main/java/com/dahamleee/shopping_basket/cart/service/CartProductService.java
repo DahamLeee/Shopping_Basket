@@ -13,4 +13,6 @@ public interface CartProductService {
     void incrementCartProduct(Long cartProductId);
 
     void decrementCartProduct(Long cartProductId);
+
+    int order(List<Long> cartProductIds);
 }

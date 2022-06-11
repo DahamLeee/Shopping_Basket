@@ -32,4 +32,20 @@ public class CartProductRepositoryCustomImpl implements CartProductRepositoryCus
                 .execute();
     }
 
+    @Override
+    public List<CartProduct> findCartProductsByIdsWhereNotSoldOut(List<Long> cartProductIds) {
+        return queryFactory.selectFrom(cartProduct)
+                .join(cartProduct.product, product).fetchJoin()
+                .where(cartProduct.id.in(cartProductIds))
+                .where(cartProduct.product.quantity.ne(0))
+                .fetch();
+    }
+
+    @Override
+    public void removeCartProductsByCartProducts(List<CartProduct> cartProducts) {
+        queryFactory.delete(cartProduct)
+                .where(cartProduct.in(cartProducts))
+                .execute();
+    }
+
 }
