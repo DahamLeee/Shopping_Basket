@@ -30,6 +30,10 @@
         <br>
 
         <div class="d-flex flex-row-reverse font-weight-bold" th:text="|결정예정금액 : ${cart.totalPrice()}원|"></div>
+        <div class="d-flex flex-row-reverse font-weight-bold">
+            <button class="btn btn-danger" th:onclick="orderCartProduct()">주문하기
+            </button>
+        </div>
 
         <script th:inline="javascript">
             var checkboxes = document.querySelectorAll("input[type=checkbox][name=cartProduct]");
@@ -107,7 +111,7 @@
                 })
             }
 
-            // + button handler
+            // plus button event handler
             function incrementValue(e) {
                 e.preventDefault();
                 var inputId = $(e.target).data('product-id'); // 플러스 버튼을 클릭한 Input 의 ID 값을 찾는다.
@@ -141,7 +145,7 @@
                 });
             }
 
-            // - button handler
+            // minus button click event handler
             function decrementValue(e) {
                 e.preventDefault();
                 var inputId = $(e.target).data('product-id'); // 플러스 버튼을 클릭한 Input 의 ID 값을 찾는다.
@@ -176,6 +180,40 @@
             $input.on('click', '.button-minus', function (e) {
                 decrementValue(e);
             });
+
+            function orderCartProduct() {
+                if (checkedBoxes.length === 0) { // 선택된 상품이 하나도 없다면 ?
+                    // 전체 주문
+                    orderAllCartProduct();
+                    return;
+                }
+
+                orderCheckedCartProduct();
+            }
+
+            function orderAllCartProduct() {
+                var cartProductIds = [];
+
+                checkboxes.forEach(function (checkbox) {
+                    cartProductIds.push(checkbox.value);
+                });
+
+                $.ajax({
+                    url: "/api/carts/cartProducts/order",
+                    type: "POST",
+                    data: {
+                        cartProductIds: cartProductIds
+                    }
+                })
+                    .done(function (data) {
+                        alert(data.message);
+                        location.href = "/carts";
+                    })
+            }
+
+            function orderCheckedCartProduct() {
+                console.log(checkedBoxes);
+            }
         </script>
     </div>
 </div>
