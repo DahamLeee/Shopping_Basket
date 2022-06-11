@@ -181,6 +181,7 @@
                 decrementValue(e);
             });
 
+            // 주문하기 button 의 event handler
             function orderCartProduct() {
                 if (checkedBoxes.length === 0) { // 선택된 상품이 하나도 없다면 ?
                     // 전체 주문
@@ -191,6 +192,7 @@
                 orderCheckedCartProduct();
             }
 
+            // 체크된 상품이 존재하지 않을 경우 모든 상품 주문 요청
             function orderAllCartProduct() {
                 var cartProductIds = [];
 
@@ -198,6 +200,22 @@
                     cartProductIds.push(checkbox.value);
                 });
 
+                requestOrder(cartProductIds);
+            }
+
+            // 체크된 상품이 존재할 경우 체크된 상품만 주문 요청
+            function orderCheckedCartProduct() {
+                var cartProductIds = [];
+
+                checkedBoxes.forEach(function (checkbox) {
+                    cartProductIds.push(checkbox.value);
+                });
+
+                requestOrder(cartProductIds);
+            }
+
+            // ajax 를 통한 상품 주문 요청 메서드
+            function requestOrder(cartProductIds) {
                 $.ajax({
                     url: "/api/carts/cartProducts/order",
                     type: "POST",
@@ -209,10 +227,6 @@
                         alert(data.message);
                         location.href = "/carts";
                     })
-            }
-
-            function orderCheckedCartProduct() {
-                console.log(checkedBoxes);
             }
         </script>
     </div>

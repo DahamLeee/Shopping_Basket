@@ -56,6 +56,10 @@ public class CartProductServiceImpl implements CartProductService {
     public int order(List<Long> cartProductIds) {
         List<CartProduct> findCartProducts = cartProductRepository.findCartProductsByIdsWhereNotSoldOut(cartProductIds);
 
+        if (findCartProducts.isEmpty()) {
+            return 0;
+        }
+
         int totalPrice = findCartProducts.stream()
                 .mapToInt(CartProduct::calculateTotalCartProductPrice)
                 .reduce(0, Integer::sum);
