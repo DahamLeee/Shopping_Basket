@@ -19,6 +19,8 @@ public class CartRepositoryCustomImpl implements CartRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
+    // 현재 유저 기능이 없기 때문에 하나의 Cart Entity 만을 사용하기 때문에
+    // 맨 처음 Cart 를 조회함
     @Override
     public Optional<Cart> findFirstCart() {
         return Optional.ofNullable(queryFactory
@@ -27,6 +29,7 @@ public class CartRepositoryCustomImpl implements CartRepositoryCustom {
                 .fetchFirst());
     }
 
+    // View 에 넘기기 위해서 Cart Entity 를 CartDto 형식으로 조회함
     @Override
     public Optional<CartDto> findFirstCartDto() {
         Cart cart = findCartFetchFirst();
@@ -36,12 +39,14 @@ public class CartRepositoryCustomImpl implements CartRepositoryCustom {
         return Optional.of(new CartDto(cart.getId(), cartProductDtos));
     }
 
+    // 맨 처음 Cart 를 조회함
     private Cart findCartFetchFirst() {
         return queryFactory
                 .selectFrom(cart)
                 .fetchFirst();
     }
 
+    // Cart 에 담겨있는 장바구니 상품을 모두 조회함
     private List<CartProductDto> findCartProductByCart(Cart cart) {
         return queryFactory
                 .select(new QCartProductDto(

@@ -20,6 +20,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
+    // 전체 상품 조회
     @Override
     public Page<ProductDto> search(Pageable pageable) {
         List<ProductDto> content = queryFactory

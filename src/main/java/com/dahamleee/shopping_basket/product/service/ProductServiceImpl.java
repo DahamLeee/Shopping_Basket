@@ -17,6 +17,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
+    // 전체 상품 조회
     @Override
     public Page<ProductDto> search(Pageable pageable) {
         return productRepository.search(pageable);

@@ -1,5 +1,8 @@
 package com.dahamleee.shopping_basket.product.domain;
 
+/**
+ * 상품의 그룹을 담당할 enum 클래스
+ */
 public enum DeliveryType {
 
     SSG("쓱배송"),

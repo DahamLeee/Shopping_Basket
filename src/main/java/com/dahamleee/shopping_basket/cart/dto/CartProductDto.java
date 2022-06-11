@@ -7,6 +7,9 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entity 자체를 View 에 전달하면 안되기 때문에 데이터 전달을 위한 클래스
+ */
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class CartProductDto {

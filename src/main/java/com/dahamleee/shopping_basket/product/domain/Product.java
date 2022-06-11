@@ -58,6 +58,7 @@ public class Product {
         this.quantity = restQuantity;
     }
 
+    // 최대 주문 수량 validation
     public void maxQuantity(int count) {
         if (this.quantity < count) {
             throw new CartProductCountMaximumException("최대 주문 수량은 " + this.quantity + "개 입니다.");

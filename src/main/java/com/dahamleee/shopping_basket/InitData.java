@@ -14,6 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 애플리케이션 시작 시 덤프 데이터를 추가하는 클래스
+ */
 @Component
 @RequiredArgsConstructor
 public class InitData {
@@ -32,6 +35,7 @@ public class InitData {
 
         private final EntityManager em;
 
+        // DB 에 Product 데이터 추가
         public void addProducts() {
             Product hush = Product.of("허쉬 초코멜로쿠키 45g", 600, 10, DeliveryType.SSG);
             Product roll = Product.of("크리스피롤 12 곡 180g", 2_800, 5, DeliveryType.SSG);
@@ -54,11 +58,13 @@ public class InitData {
             addCartProducts(hush, roll);
         }
 
+        // 추가 된 상품 중 일부를 장바구니에 담음
         private void addCartProducts(Product... products) {
             List<CartProduct> cartProducts = Arrays.stream(products)
                     .map(product -> CartProduct.createCartProduct(product, product.getPrice()))
                     .collect(Collectors.toList());
 
+            // 유저 기능이 없기 때문에 Cart Entity 를 무조건적으로 하나 생성하고 시작하여야 함.
             Cart cart = new Cart();
             cartProducts.forEach(cart::addCartProduct);
 

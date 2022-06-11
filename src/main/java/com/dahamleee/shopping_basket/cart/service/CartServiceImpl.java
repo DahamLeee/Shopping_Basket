@@ -19,12 +19,14 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
 
+    // 장바구니 엔티티 조회
     @Override
     public CartDto findFirstCartDto() {
         return cartRepository.findFirstCartDto()
                 .orElseThrow(() -> new CartNotFoundException("장바구니가 정상적으로 생성되어있지 않습니다."));
     }
 
+    // 장바구니에 상품을 추가
     @Override
     @Transactional
     public int addCartProduct(Long productId) {
@@ -37,6 +39,7 @@ public class CartServiceImpl implements CartService {
         return cart.addCartProduct(CartProduct.createCartProduct(findProduct, findProduct.getPrice()));
     }
 
+    // 장바구니에 담겨있는 개수를 구함
     @Override
     public int cartProductCount() {
         return findFirstCartDto().cartProductCount();

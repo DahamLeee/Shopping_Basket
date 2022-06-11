@@ -13,6 +13,7 @@ public class WebMvcConfig {
     @PersistenceContext
     EntityManager em;
 
+    // querydsl 을 사용하기 위해 JPAQueryFactory 를 빈으로 등록
     @Bean
     public JPAQueryFactory jpaQueryFactory() {
         return new JPAQueryFactory(em);

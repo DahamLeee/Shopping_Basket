@@ -12,6 +12,9 @@ import java.util.List;
 
 import static java.util.Collections.*;
 
+/**
+ * Cart 에서 OneToMany 관계의 List<CartProduct> 를 일급 콜렉션으로 분리한 클래스
+ */
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CartProducts {

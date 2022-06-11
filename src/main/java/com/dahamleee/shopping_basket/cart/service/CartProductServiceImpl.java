@@ -15,6 +15,7 @@ public class CartProductServiceImpl implements CartProductService {
 
     private final CartProductRepository cartProductRepository;
 
+    // 장바구니 상품의 체크 상태를 변경
     @Override
     @Transactional
     public void changeCartProductCheckStatus(Long cartProductId) {
@@ -22,12 +23,14 @@ public class CartProductServiceImpl implements CartProductService {
         findCartProduct.changeCheckStatus();
     }
 
+    // 장바구니 상품의 선택 삭제
     @Override
     @Transactional
     public void removeCartProductsByIds(List<Long> cartProductIds) {
         cartProductRepository.removeCartProductsByIds(cartProductIds);
     }
 
+    // 장바구니 상품의 개수를 변환
     @Override
     @Transactional
     public void changeCartProductCount(Long cartProductId, int cartProductCount) {
@@ -37,6 +40,7 @@ public class CartProductServiceImpl implements CartProductService {
         findCartProduct.inputCount(cartProductCount);
     }
 
+    // 장바구니 상품의 개수를 1 증가
     @Override
     @Transactional
     public void incrementCartProduct(Long cartProductId) {
@@ -44,6 +48,7 @@ public class CartProductServiceImpl implements CartProductService {
         findCartProduct.increaseCount();
     }
 
+    // 장바구니 상품의 개수를 1 감소
     @Override
     @Transactional
     public void decrementCartProduct(Long cartProductId) {
@@ -51,6 +56,7 @@ public class CartProductServiceImpl implements CartProductService {
         findCartProduct.decreaseCount();
     }
 
+    // 장바구니 상품의 주문 진행
     @Override
     @Transactional
     public int order(List<Long> cartProductIds) {
@@ -69,6 +75,7 @@ public class CartProductServiceImpl implements CartProductService {
         return totalPrice;
     }
 
+    // PK 를 통해 장바구니 상품 조회
     private CartProduct findOnlyCartProductById(Long cartProductId) {
         return cartProductRepository.findById(cartProductId)
                 .orElseThrow(() -> new CartProductNotFoundException("존재하지 않는 장바구니 상품입니다."));

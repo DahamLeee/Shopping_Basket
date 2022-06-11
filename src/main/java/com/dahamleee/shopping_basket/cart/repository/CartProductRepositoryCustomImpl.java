@@ -15,6 +15,7 @@ public class CartProductRepositoryCustomImpl implements CartProductRepositoryCus
 
     private final JPAQueryFactory queryFactory;
 
+    // 장바구니 상품을 PK 를 통해 조회 (ToOne 관계의 Product Entity 는 페치 조인)
     @Override
     public Optional<CartProduct> findCartProductById(Long cartProductId) {
         return Optional.ofNullable(
@@ -25,6 +26,7 @@ public class CartProductRepositoryCustomImpl implements CartProductRepositoryCus
                         .fetchOne());
     }
 
+    // 선택된 장바구니 상품의 PK 를 전달받아 삭제
     @Override
     public void removeCartProductsByIds(List<Long> cartProductIds) {
         queryFactory.delete(cartProduct)
@@ -32,6 +34,7 @@ public class CartProductRepositoryCustomImpl implements CartProductRepositoryCus
                 .execute();
     }
 
+    // 장바구니 목록에서 품절되지 않은 상품을 조회함
     @Override
     public List<CartProduct> findCartProductsByIdsWhereNotSoldOut(List<Long> cartProductIds) {
         return queryFactory.selectFrom(cartProduct)
@@ -41,6 +44,7 @@ public class CartProductRepositoryCustomImpl implements CartProductRepositoryCus
                 .fetch();
     }
 
+    // 장바구니에서 주문을 진행한 후에 주문이 완료된 상품을 삭제함
     @Override
     public void removeCartProductsByCartProducts(List<CartProduct> cartProducts) {
         queryFactory.delete(cartProduct)
