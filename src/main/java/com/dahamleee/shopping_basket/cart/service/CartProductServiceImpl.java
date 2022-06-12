@@ -66,6 +66,9 @@ public class CartProductServiceImpl implements CartProductService {
             return 0;
         }
 
+        // validation
+        findCartProducts.forEach(CartProduct::validateMaxQuantity);
+
         int totalPrice = findCartProducts.stream()
                 .mapToInt(CartProduct::calculateTotalCartProductPrice)
                 .reduce(0, Integer::sum);

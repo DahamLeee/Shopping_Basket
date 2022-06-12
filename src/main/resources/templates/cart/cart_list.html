@@ -224,6 +224,9 @@
                         cartProductIds: cartProductIds
                     }
                 })
+                    .fail(function (response) {
+                        alert(response.responseJSON.message);
+                    })
                     .done(function (data) {
                         alert(data.message);
                         location.href = "/carts";

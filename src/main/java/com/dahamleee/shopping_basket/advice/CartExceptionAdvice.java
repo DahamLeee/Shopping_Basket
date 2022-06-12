@@ -2,6 +2,7 @@ package com.dahamleee.shopping_basket.advice;
 
 import com.dahamleee.shopping_basket.advice.result.ErrorResult;
 import com.dahamleee.shopping_basket.exception.CartNotFoundException;
+import com.dahamleee.shopping_basket.exception.CartProductCountMaximumException;
 import com.dahamleee.shopping_basket.exception.CartProductCountMinimumException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,13 @@ public class CartExceptionAdvice {
     @ExceptionHandler(CartProductCountMinimumException.class)
     public ErrorResult cartProductCountMinimumException(CartProductCountMinimumException e) {
         log.error("[cartProductCountMinimumException] ex", e);
+        return new ErrorResult("BAD", e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CartProductCountMaximumException.class)
+    public ErrorResult cartProductCountMaximumException(CartProductCountMaximumException e) {
+        log.error("cartProductCountMaximumException] ex", e);
         return new ErrorResult("BAD", e.getMessage());
     }
 }
