@@ -44,7 +44,9 @@
             data: {},
             dataType: "json",
             success: (data) => {alert(data.message)},
-            error: (data) => {alert(data.message)}
+            error: (response) => {
+                alert(response.responseJSON.message);
+            }
         })
     }
 </script>

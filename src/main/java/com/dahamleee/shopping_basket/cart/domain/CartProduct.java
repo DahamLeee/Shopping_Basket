@@ -70,7 +70,12 @@ public class CartProduct {
     // 장바구니 상품의 개수를 1 증가시킴
     public void increaseCount() {
         isMaxCartCount();
+        product.maxQuantity(this.count + 1);
         this.count++;
+    }
+
+    public void validateMaxQuantity() {
+        product.maxQuantity(this.count);
     }
 
     // 최대 주문 수량 validation
