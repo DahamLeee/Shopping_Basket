@@ -18,10 +18,17 @@ public class ProductController {
      * 상품 목록을 보여주는 메인 화면
      */
     @GetMapping("/")
-    public String products(
-            @PageableDefault(size = 15) Pageable pageable, Model model) {
+    public String products(@PageableDefault(size = 5) Pageable pageable, Model model) {
 
         model.addAttribute("products", productService.search(pageable));
+
+        return "product/product_list";
+    }
+
+    @GetMapping("/search")
+    public String searchProduct(@PageableDefault Pageable pageable, Model model) {
+
+        model.addAttribute("product", productService.search(pageable));
 
         return "product/product_list";
     }
