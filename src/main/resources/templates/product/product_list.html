@@ -19,13 +19,39 @@
         </div>
     </div>
 
-    <div class="content-list">
+    <div id="product-list" class="content-list">
         <div class="row">
             <div th:each="product: ${products}" class="col-md-4 col-xxl-3 mt-5">
                 <div th:replace="product/product_card :: productCardFragment(${product})"></div>
             </div>
         </div>
     </div>
+
+    <br>
+
+    <div class="d-flex justify-content-center box-footer clearfix">
+        <ul th:style="${products.number >= products.totalPages ? 'display:none' : ''}"
+            class="pagination pagination-sm no-margin pull-right">
+            <li th:style="${products.first ? '' : 'display:none'}">
+                <a href="#" class="btn btn-outline-black" aria-label="First">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        let products = /*[[ ${products} ]]*/;
+        /*]]*/
+
+        console.log(products);
+
+        // page
+        // size
+
+    </script>
+
 </div>
 </body>
 </html>
