@@ -19,23 +19,60 @@
         </div>
     </div>
 
-    <div id="product-list" class="content-list">
-        <div class="row">
-            <div th:each="product: ${products}" class="col-md-4 col-xxl-3 mt-5">
-                <div th:replace="product/product_card :: productCardFragment(${product})"></div>
+    <div id="productList">
+        <div class="content-list">
+            <div class="row">
+                <div th:each="product: ${products}" class="col-md-4 col-xxl-3 mt-5">
+                    <div th:replace="product/product_card :: productCardFragment(${product})"></div>
+                </div>
             </div>
         </div>
+        <br>
     </div>
-
-    <br>
 
     <div class="d-flex justify-content-center box-footer clearfix">
         <ul th:style="${products.number >= products.totalPages ? 'display:none' : ''}"
-            class="pagination pagination-sm no-margin pull-right">
-            <li th:style="${products.first ? '' : 'display:none'}">
-                <a href="#" class="btn btn-outline-black" aria-label="First">
+            class="pagination pagination-sm no-margin pull-right"
+            th:with="start=${(products.number / 10) * 10 + 1}, last=(${products.number / 10 * 10 + 10 < products.totalPages ? (products.number / 10) * 10 + 10 : products.totalPages})">
+            <li th:style="${products.first ? 'display:none' : ''}">
+                <button class="btn btn-outline-black"
+                        th:page="${0}"
+                        th:onclick="search(this.getAttribute('page'))" aria-label="First">
                     <span aria-hidden="true">&laquo;</span>
-                </a>
+                </button>
+                &nbsp;
+            </li>
+            <li th:style="${products.number < 10 ? 'display:none' : ''}">
+                <button class="btn btn-outline-black"
+                        th:page="${products.number / 10} * 10 - 1"
+                        th:onclick="search(this.getAttribute('page'))" aria-label="Previous">
+                    <span aria-hidden="true">&lt;</span>
+                </button>
+                &nbsp;
+            </li>
+            <li th:each="page: ${#numbers.sequence(start, last)}">
+                <button class="btn btn-outline-black"
+                        th:text="${page}"
+                        th:page="${page - 1}"
+                        th:onclick="search(this.getAttribute('page'))" aria-label="Pagination"
+                        th:classappend="${page == products.number + 1} ? 'active'">
+                </button>
+                &nbsp;
+            </li>
+            <li th:style="${last == products.totalPages ? 'display:none' : ''}">
+                <button class="btn btn-outline-black"
+                        th:page="${last}"
+                        th:onclick="search(this.getAttribute('page'))" aria-label="Next Page">
+                    <span aria-hidden="true">&gt;</span>
+                </button>
+                &nbsp;
+            </li>
+            <li th:style="products.last ? '' : 'display:none'">
+                <button class="btn btn-outline-black"
+                        th:page="${products.totalElements - 1}"
+                        th:onclick="search(this.getAttribute('page'))" aria-label="Last">
+                    <span aria-hidden="true">&raquo;</span>
+                </button>
             </li>
         </ul>
     </div>
@@ -45,11 +82,19 @@
         let products = /*[[ ${products} ]]*/;
         /*]]*/
 
-        console.log(products);
-
-        // page
-        // size
-
+        function search(page) {
+            $.ajax({
+                type: "POST",
+                url: "/products/search",
+                data: {
+                    page: page,
+                    size: 1
+                },
+            })
+                .done(function (result) {
+                    $("#productList").replaceWith(result);
+                })
+        }
     </script>
 
 </div>
