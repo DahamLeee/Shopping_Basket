@@ -19,16 +19,16 @@
         </div>
     </div>
 
-    <div id="product-list" class="content-list">
-        <div class="row">
-            <div th:each="product: ${products}" class="col-md-4 col-xxl-3 mt-5">
-                <div th:replace="product/product_card :: productCardFragment(${product})"></div>
+    <div id="productList">
+        <div class="content-list">
+            <div class="row">
+                <div th:each="product: ${products}" class="col-md-4 col-xxl-3 mt-5">
+                    <div th:replace="product/product_card :: productCardFragment(${product})"></div>
+                </div>
             </div>
         </div>
+        <br>
     </div>
-
-    <br>
-    <div th:text="${products.last}"></div>
 
     <div class="d-flex justify-content-center box-footer clearfix">
         <ul th:style="${products.number >= products.totalPages ? 'display:none' : ''}"
@@ -83,7 +83,17 @@
         /*]]*/
 
         function search(page) {
-            alert(page);
+            $.ajax({
+                type: "POST",
+                url: "/products/search",
+                data: {
+                    page: page,
+                    size: 1
+                },
+            })
+                .done(function (result) {
+                    $("#productList").replaceWith(result);
+                })
         }
     </script>
 

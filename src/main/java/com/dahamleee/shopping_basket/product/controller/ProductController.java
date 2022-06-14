@@ -7,6 +7,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,11 +26,12 @@ public class ProductController {
         return "product/product_list";
     }
 
-    @GetMapping("/search")
+    @PostMapping("/products/search")
     public String searchProduct(@PageableDefault Pageable pageable, Model model) {
+        System.out.println(pageable.getPageNumber());
 
-        model.addAttribute("product", productService.search(pageable));
+        model.addAttribute("products", productService.search(pageable));
 
-        return "product/product_list";
+        return "product/product_list :: #productList";
     }
 }
