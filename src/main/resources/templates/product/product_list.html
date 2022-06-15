@@ -29,51 +29,8 @@
         </div>
         <br>
 
-        <div class="d-flex justify-content-center box-footer clearfix">
-            <ul th:style="${products.number >= products.totalPages ? 'display:none' : ''}"
-                class="pagination pagination-sm no-margin pull-right"
-                th:with="start=${(products.number / 10) * 10 + 1}, last=(${products.number / 10 * 10 + 10 < products.totalPages ? (products.number / 10) * 10 + 10 : products.totalPages})">
-                <li th:style="${products.first ? 'display:none' : ''}">
-                    <button class="btn btn-outline-black"
-                            th:page="${0}"
-                            th:onclick="search(this.getAttribute('page'))" aria-label="First">
-                        <span aria-hidden="true">&laquo;</span>
-                    </button>
-                    &nbsp;
-                </li>
-                <li th:style="${products.number < 10 ? 'display:none' : ''}">
-                    <button class="btn btn-outline-black"
-                            th:page="${products.number / 10} * 10 - 1"
-                            th:onclick="search(this.getAttribute('page'))" aria-label="Previous">
-                        <span aria-hidden="true">&lt;</span>
-                    </button>
-                    &nbsp;
-                </li>
-                <li th:each="page: ${#numbers.sequence(start, last)}">
-                    <button class="btn btn-outline-black"
-                            th:text="${page}"
-                            th:page="${page - 1}"
-                            th:onclick="search(this.getAttribute('page'))" aria-label="Pagination"
-                            th:classappend="${page == products.number + 1} ? 'active'">
-                    </button>
-                    &nbsp;
-                </li>
-                <li th:style="${last == products.totalPages ? 'display:none' : ''}">
-                    <button class="btn btn-outline-black"
-                            th:page="${last}"
-                            th:onclick="search(this.getAttribute('page'))" aria-label="Next Page">
-                        <span aria-hidden="true">&gt;</span>
-                    </button>
-                    &nbsp;
-                </li>
-                <li th:style="${products.last ? 'display:none' : ''}">
-                    <button class="btn btn-outline-black"
-                            th:page="${products.totalElements - 1}"
-                            th:onclick="search(this.getAttribute('page'))" aria-label="Last">
-                        <span aria-hidden="true">&raquo;</span>
-                    </button>
-                </li>
-            </ul>
+        <div class="productPageMarker">
+            <div th:replace="product/product_page_marker :: productPageMarker(${products})"></div>
         </div>
     </div>
 

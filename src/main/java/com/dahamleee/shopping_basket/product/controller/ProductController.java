@@ -28,7 +28,6 @@ public class ProductController {
 
     @PostMapping("/products/search")
     public String searchProduct(@PageableDefault Pageable pageable, Model model) {
-        System.out.println(pageable.getPageNumber());
 
         model.addAttribute("products", productService.search(pageable));
 
