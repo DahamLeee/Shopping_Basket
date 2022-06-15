@@ -20,7 +20,7 @@
     </div>
 
     <div id="productList">
-        <div class="content-list">
+        <div class="contentList">
             <div class="row">
                 <div th:each="product: ${products}" class="col-md-4 col-xxl-3 mt-5">
                     <div th:replace="product/product_card :: productCardFragment(${product})"></div>
