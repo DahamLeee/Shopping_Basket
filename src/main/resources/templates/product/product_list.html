@@ -35,6 +35,25 @@
     </div>
 
     <script th:inline="javascript">
+        function change(state) {
+            if (state === null) { // 초기 페이지
+                location.replace("/");
+            } else { // page added with pushState
+                $("#productList").replaceWith(state);
+            }
+        }
+
+        $(window).on("popstate", function (e) {
+            change(e.originalEvent.state);
+        });
+
+        (function (original) {
+            history.pushState = function (state) {
+                change(state);
+                return original.apply(this, arguments);
+            }
+        })(history.pushState);
+
         function search(page) {
             $.ajax({
                 type: "POST",
@@ -46,6 +65,9 @@
             })
                 .done(function (result) {
                     $("#productList").replaceWith(result);
+                    var url = "?page=" + page;
+
+                    history.pushState(result, "unused", url);
                 })
         }
     </script>
