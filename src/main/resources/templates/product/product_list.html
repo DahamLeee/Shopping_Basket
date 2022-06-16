@@ -20,6 +20,21 @@
     </div>
 
     <div id="productList">
+        <form th:object="${productSearchCondition}">
+            <div class="d-flex product-search-wrapper mb-4 mt-4">
+                <label for="keyword" class="col-12">
+                    <input type="text" id="keyword" th:field="*{keyword}" class="form-control form-user custom-shadow"
+                           placeholder="찾고자 하는 상품명을 입력해주세요."
+                           autocomplete="off"/>
+                </label>
+                <button type="submit" class="button product-search-btn ms-2">
+                    <span class="icon">
+                        <i class="fas fa-search fa-lg"></i>
+                    </span>
+                </button>
+            </div>
+        </form>
+
         <div class="contentList">
             <div class="row">
                 <div th:each="product: ${products}" class="col-md-4 col-xxl-3 mt-5">
