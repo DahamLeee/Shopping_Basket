@@ -2,11 +2,13 @@ package com.dahamleee.shopping_basket.product.repository;
 
 import com.dahamleee.shopping_basket.product.dto.ProductDto;
 import com.dahamleee.shopping_basket.product.dto.QProductDto;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 
 import java.util.List;
 
@@ -36,11 +38,10 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
                 .limit(pageable.getPageSize())
                 .fetch();
 
-        long totalSize = queryFactory
-                .selectFrom(product)
-                .fetch()
-                .size();
+        JPAQuery<Long> countQuery = queryFactory
+                .select(product.count())
+                .from(product);
 
-        return new PageImpl<>(content, pageable, totalSize);
+        return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
     }
 }
