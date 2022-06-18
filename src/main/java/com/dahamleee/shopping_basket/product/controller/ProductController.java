@@ -26,18 +26,18 @@ public class ProductController {
             @ModelAttribute("productSearchCondition") ProductSearchCondition productSearchCondition,
             Model model) {
 
-        model.addAttribute("products", productService.search(pageable));
+        model.addAttribute("products", productService.search(pageable, productSearchCondition));
 
         return "product/product_list";
     }
 
-    @PostMapping("/products/search")
+    @GetMapping("/products/search")
     public String searchProduct(
             @PageableDefault Pageable pageable,
             @ModelAttribute("productSearchCondition") ProductSearchCondition productSearchCondition,
             Model model) {
 
-        model.addAttribute("products", productService.search(pageable));
+        model.addAttribute("products", productService.search(pageable, productSearchCondition));
 
         return "product/product_list :: #productList";
     }
