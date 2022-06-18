@@ -1,14 +1,16 @@
 package com.dahamleee.shopping_basket.product.repository;
 
+import com.dahamleee.shopping_basket.product.domain.ProductSearchCondition;
 import com.dahamleee.shopping_basket.product.dto.ProductDto;
 import com.dahamleee.shopping_basket.product.dto.QProductDto;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 
     // 전체 상품 조회
     @Override
-    public Page<ProductDto> search(Pageable pageable) {
+    public Page<ProductDto> search(Pageable pageable, ProductSearchCondition productSearchCondition) {
         List<ProductDto> content = queryFactory
                 .select(new QProductDto(
                         product.id.as("productId"),
@@ -34,14 +36,20 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
                         product.deliveryType
                 ))
                 .from(product)
+                .where(productNameLike(productSearchCondition.getKeyword()))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
 
         JPAQuery<Long> countQuery = queryFactory
                 .select(product.count())
-                .from(product);
+                .from(product)
+                .where(productNameLike(productSearchCondition.getKeyword()));
 
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
+    }
+
+    private BooleanExpression productNameLike(String productName) {
+        return StringUtils.hasText(productName) ? product.name.like("%" + productName + "%") : null;
     }
 }

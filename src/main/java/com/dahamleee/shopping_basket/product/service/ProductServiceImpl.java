@@ -1,5 +1,6 @@
 package com.dahamleee.shopping_basket.product.service;
 
+import com.dahamleee.shopping_basket.product.domain.ProductSearchCondition;
 import com.dahamleee.shopping_basket.product.dto.ProductDto;
 import com.dahamleee.shopping_basket.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
 
     // 전체 상품 조회
     @Override
-    public Page<ProductDto> search(Pageable pageable) {
-        return productRepository.search(pageable);
+    public Page<ProductDto> search(Pageable pageable, ProductSearchCondition productSearchCondition) {
+        return productRepository.search(pageable, productSearchCondition);
     }
 }
