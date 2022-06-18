@@ -45,7 +45,7 @@
         <br>
 
         <div class="productPageMarker">
-            <div th:replace="product/product_page_marker :: productPageMarker(${products})"></div>
+            <div th:replace="product/product_page_marker :: productPageMarker(${products}, ${productSearchCondition})"></div>
         </div>
     </div>
 
@@ -69,18 +69,19 @@
             }
         })(history.pushState);
 
-        function search(page) {
+        function search(page, keyword) {
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "/products/search",
                 data: {
                     page: page,
+                    keyword: keyword,
                     size: 1
                 },
             })
                 .done(function (result) {
                     $("#productList").replaceWith(result);
-                    var url = "?page=" + page;
+                    var url = "?page=" + page + "?keyword=" + keyword;
 
                     history.pushState(result, "unused", url);
                 })
