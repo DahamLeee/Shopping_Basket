@@ -50,6 +50,6 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
     }
 
     private BooleanExpression productNameLike(String productName) {
-        return StringUtils.hasText(productName) ? product.name.like("%" + productName + "%") : null;
+        return StringUtils.hasText(productName) ? product.name.contains(productName) : null;
     }
 }
