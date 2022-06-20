@@ -1,5 +1,6 @@
 package com.dahamleee.shopping_basket.cart.domain;
 
+import com.dahamleee.shopping_basket.common.BaseEntity;
 import com.dahamleee.shopping_basket.exception.CartProductCountMaximumException;
 import com.dahamleee.shopping_basket.exception.CartProductCountMinimumException;
 import com.dahamleee.shopping_basket.product.domain.Product;
@@ -16,7 +17,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CartProduct {
+public class CartProduct extends BaseEntity {
 
     private static final int MIN_CART_COUNT = 1;
     private static final int MAX_CART_COUNT = 20;

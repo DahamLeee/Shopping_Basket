@@ -1,5 +1,7 @@
 package com.dahamleee.shopping_basket.product.domain;
 
+import com.dahamleee.shopping_basket.common.BaseEntity;
+import com.dahamleee.shopping_basket.common.BaseTimeEntity;
 import com.dahamleee.shopping_basket.exception.CartProductCountMaximumException;
 import com.dahamleee.shopping_basket.exception.NotEnoughProductException;
 import lombok.AccessLevel;
@@ -15,7 +17,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Product {
+public class Product extends BaseEntity {
 
     @Id
     @Column(name = "product_id")
